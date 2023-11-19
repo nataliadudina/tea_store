@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="background-section">
+    <div class="container-xxl">
+        <div class="col-12">
+            <h1 class="text-center text-black">Contact Tea Shop</h1>
+        </div>
+    </div>
+</section>
+
+<h6 class="text-center mb-4">Contact Tea Shop through this form and we will respond within a maximum period of 48-72
+    working hours.</h6>
+
+<!-- Feedback form -->
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 60vh;">
+        <div class="col-12 col-md-4">
+            <div class="card box-shadow">
+                <div class="card-body">
+                    <form method="post" action="" class="form-floating">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name">Your name</label>
+                            <input type="text" name="name" class="form-control" id="name" placeholder="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="email"
+                                   aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone">Phone number</label>
+                            <input type="text" name="phone" class="form-control" id="phone" placeholder="phone"
+                                   required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message">Your message</label>
+                            <textarea name="message" class="form-control" id="message"></textarea>
+                        </div>
+                        <button type="submit" class="w-100 btn btn-info">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
