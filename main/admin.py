@@ -19,7 +19,7 @@ class TeaProductAdmin(admin.ModelAdmin):
     list_filter = ('name', 'category',)
     ordering = ['category__name', 'price']
     list_per_page = 10
-    search_fields = ('name', 'category__name',)    # includes search by category name
+    search_fields = ('name', 'description', 'category__name',)    # includes search by category name
     list_select_related = ('category',)  # pre-loads related categories
     actions = ['set_status_in_stock', 'set_status_out_of_stock']
 

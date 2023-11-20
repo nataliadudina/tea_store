@@ -7,6 +7,8 @@ import json
 
 # Create your views here.
 def index(request):
+    last_5 = TeaProduct.objects.order_by('time_created')[:5]
+    print(*[i for i in last_5], sep=', ')
     return render(request, 'main/index.html')
 
 
