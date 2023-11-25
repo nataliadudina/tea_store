@@ -24,7 +24,7 @@ class TeaProduct(models.Model):
     flavour = models.CharField(max_length=255, **NULLABLE)
     aroma = models.CharField(max_length=255, **NULLABLE)
     preparation = models.CharField(max_length=255, **NULLABLE)
-    preview = models.ImageField(upload_to='images/tea/', **NULLABLE)
+    preview = models.ImageField(upload_to='images/tea/', **NULLABLE, verbose_name='Image path')
     price = models.DecimalField(decimal_places=2, max_digits=8)
     category = models.ForeignKey('TeaCategory', on_delete=models.PROTECT, related_name='cat')
 

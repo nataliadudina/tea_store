@@ -1,5 +1,6 @@
 from django.contrib import admin, messages
 from main.models import TeaProduct, TeaCategory
+from django.utils.safestring import mark_safe
 
 
 @admin.register(TeaCategory)
@@ -13,15 +14,21 @@ class TeaCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(TeaProduct)
 class TeaProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'category', 'in_stock',)
+    fields = ['name', 'preview', 'show_preview', 'price', 'category', 'in_stock']
+    list_display = ('name', 'show_preview', 'price', 'category', 'in_stock',)
     list_display_links = ('name',)
     list_editable = ('price', 'in_stock',)
+    readonly_fields = ('show_preview',)
     list_filter = ('name', 'category',)
     ordering = ['category__name', 'price']
     list_per_page = 10
     search_fields = ('name', 'description', 'category__name',)    # includes search by category name
     list_select_related = ('category',)  # pre-loads related categories
     actions = ['set_status_in_stock', 'set_status_out_of_stock']
+
+    @admin.display(description='Preview')
+    def show_preview(self, item: TeaProduct):
+        return mark_safe(f"<img src='{item.preview.url}' width=50")
 
     @admin.action(description='Set "in stock" status')
     def set_status_in_stock(self, request, queryset):
