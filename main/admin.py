@@ -4,7 +4,7 @@ from main.models import TeaProduct, TeaCategory
 
 @admin.register(TeaCategory)
 class TeaCategoryAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name',)
+    list_display = ('name',)
     list_display_links = ('name',)
     ordering = ['name']
     list_filter = ('name',)
@@ -13,7 +13,7 @@ class TeaCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(TeaProduct)
 class TeaProductAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'price', 'category', 'in_stock',)
+    list_display = ('name', 'price', 'category', 'in_stock',)
     list_display_links = ('name',)
     list_editable = ('price', 'in_stock',)
     list_filter = ('name', 'category',)
@@ -22,7 +22,6 @@ class TeaProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description', 'category__name',)    # includes search by category name
     list_select_related = ('category',)  # pre-loads related categories
     actions = ['set_status_in_stock', 'set_status_out_of_stock']
-
 
     @admin.action(description='Set "in stock" status')
     def set_status_in_stock(self, request, queryset):
@@ -33,4 +32,3 @@ class TeaProductAdmin(admin.ModelAdmin):
     def set_status_out_of_stock(self, request, queryset):
         count = queryset.update(in_stock=TeaProduct.Status.OUT_OF_STOCK)
         self.message_user(request, f'The status of {count} items set to "out of stock".', messages.WARNING)
-

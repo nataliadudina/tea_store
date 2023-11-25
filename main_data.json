@@ -4,17 +4,18 @@
     "pk": 1,
     "fields": {
       "name": "Black Tea Earl Grey Special",
+      "slug": "black-tea-earl-grey-special",
       "description": "Earl Grey Special is an attractive alternative for lovers of the classic Earl Grey, one of the most famous and appreciated blends in the world. A fragrant tea with a lot of personality, loved both by bergamot fans and lovers of floral teas. Black tea provides us with antioxidants and theine helps us to keep us active all day long.",
       "ingredients": "Black tea, orange peel, cornflower petals, lemongrass, Jasmine flowers, flavourings",
       "flavour": "Citrus",
       "aroma": "Citrus",
       "preparation": "Infusion 95 �C during 4 min",
-      "preview": "",
+      "preview": "images/tea/erl_grey.jpg",
       "price": "5.95",
       "category": 1,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T09:43:17.365Z",
-      "last_change": "2023-11-19T17:41:11.811Z"
+      "last_change": "2023-11-24T21:59:14.147Z"
     }
   },
   {
@@ -22,17 +23,18 @@
     "pk": 2,
     "fields": {
       "name": "Black Tea Thai Tea",
+      "slug": "black-tea-thai-tea",
       "description": "Thai tea is one of the most common ways to consume tea in Thailand. It is usually taken with lots of ice and milk, vegetable drink or even condensed milk, resulting in a creamier flavor. Also, you can add dressings such as tapioca pearls, fruit or whipped cream. Black Thai tea is a selected blend of two black teas that balances the astringency of these, with the natural sweetness of stevia leaves and a bitter tonic of dandelion root. Its aroma is intense thanks to the dandelion root that helps digestion and contributes to the functions of the intestinal tract.",
       "ingredients": "Black tea from China, Black tea from India, toasted dandelion root, stevia leaves and aromas",
       "flavour": "Sweet",
       "aroma": "Sweet",
       "preparation": "Infusion 95 �C during 4 min",
-      "preview": "",
+      "preview": "images/tea/tai.jpg",
       "price": "3.95",
       "category": 1,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T09:48:00.338Z",
-      "last_change": "2023-11-18T13:01:12.333Z"
+      "last_change": "2023-11-24T21:58:40.802Z"
     }
   },
   {
@@ -40,17 +42,18 @@
     "pk": 3,
     "fields": {
       "name": "Black Tea Irish Cream",
+      "slug": "black-tea-irish-cream",
       "description": "A mixology of sweet, creamy and toasted flavours with the benefits of the stevia and the amaranth. Hot or cold, it brings out its character and gives it a harmonious creaminess with a toasted finish. Black tea is a natural stimulant that helps to clear the mind and relax the muscles. Stevia leaves are a natural sweetener with no calories, and provide multiple benefits for cardiovascular, immune and digestive health. Amaranth popcorn is a gluten-free cereal, rich in protein, fibre and minerals.",
       "ingredients": "Black tea, caramel, coffee beans, stevia beans, amaranth beans, aromas",
       "flavour": "Sweet, Roasted",
       "aroma": "Sweet, Creamy, Roasted",
       "preparation": "Infusion 95 �C during 4 min",
-      "preview": "",
+      "preview": "images/tea/irish-cream.jpg",
       "price": "4.25",
       "category": 1,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-18T12:57:45.918Z"
+      "last_change": "2023-11-24T21:59:03.298Z"
     }
   },
   {
@@ -58,17 +61,18 @@
     "pk": 4,
     "fields": {
       "name": "Black Tea Chocolate Temptation",
+      "slug": "black-tea-chocolate-temptation",
       "description": "The sweet contrast of the different chocolates with the character of the black tea delights the palate and stimulates the well-being. It is a delicious mixture especially for chocolate and tea lovers. Black tea is a natural mild stimulant, which helps to clear the mind and relax the muscles.",
       "ingredients": "Black tea, cocoa shells, cocoa, dark and white chocolate, aromas",
       "flavour": "Sweet",
       "aroma": "Sweet, Creamy",
       "preparation": "Infusion 95 �C during 4 min",
-      "preview": "",
+      "preview": "images/tea/choco.jpg",
       "price": "6.25",
       "category": 1,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-20T10:35:12.476Z"
+      "last_change": "2023-11-24T21:59:24.499Z"
     }
   },
   {
@@ -76,17 +80,18 @@
     "pk": 6,
     "fields": {
       "name": "Pu Erh Royal",
+      "slug": "pu-erh-royal",
       "description": "Pu Erh is a tea of proven purifying and digestive effect with low theine content. It is obtained through a microbiotic fermentation system that gives us a particularly wooded aroma and a very attractive, totally natural character. To this day, the Chinese tradition of discarding the first infusion after infusing the tea leaves for a few seconds is maintained and these same leaves are reused multiple times. It is considered \"the tea of health\", since according to the traditional Chinese medicine, it acts on the energies that regulate the functions of the body.",
       "ingredients": "Pu Erh red tea with special fermentation",
       "flavour": "Nutty, Woody",
       "aroma": "Earthy",
       "preparation": "Infusion 95 �C during 3-5 min",
-      "preview": "",
+      "preview": "images/tea/royal.jpg",
       "price": "10.95",
       "category": 2,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-17T10:00:22.955Z"
+      "last_change": "2023-11-24T22:03:24.726Z"
     }
   },
   {
@@ -94,17 +99,18 @@
     "pk": 7,
     "fields": {
       "name": "Pu Erh Vanilla",
+      "slug": "pu-erh-vanilla",
       "description": "From the orchid is extracted the vanilla with its authentic sweet and rich flavor. A three-cup-a-day plan helps the body's purification process. Enjoy it with opr without a vegetable drink, at breakfast and after meals. Pu Erh is a tea with a low content of theine and is a special fermentation tea with purifying, antioxidant and anti-inflammatory properties that helps improve digestion after meals.",
       "ingredients": "Pu Erh red tea, vanilla bits, aroma",
       "flavour": "Sweet",
       "aroma": "Sweet",
       "preparation": "Infusion 95 �C during 3-5 min",
-      "preview": "",
+      "preview": "images/tea/vanilla.jpg",
       "price": "8.75",
       "category": 2,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-17T10:00:22.955Z"
+      "last_change": "2023-11-24T22:03:04.726Z"
     }
   },
   {
@@ -112,17 +118,18 @@
     "pk": 8,
     "fields": {
       "name": "Pu Erh Strawberry Cream",
+      "slug": "pu-erh-strawberry-cream",
       "description": "A mixture with a creamy, sweet and delicate heart. The perfect ingredients for a cleansing break. Hot or cold, with or without a vegetable drink will never leave you indifferent. A tempting and exquisite taste. Pu Erh is a tea with a low content of theine and is a special fermentation tea with purifying, antioxidant and anti-inflammatory properties that helps improve digestion after meals.",
       "ingredients": "Pu Erh red tea, apple, carob, strawberry, aroma",
       "flavour": "Creamy, Fruity",
       "aroma": "Sweet, Fruity",
       "preparation": "Infusion 95 �C during 3-5 min",
-      "preview": "",
+      "preview": "images/tea/strawberry_2Arybs1.jpg",
       "price": "7.95",
       "category": 2,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-17T10:00:22.955Z"
+      "last_change": "2023-11-24T22:02:55.792Z"
     }
   },
   {
@@ -130,17 +137,18 @@
     "pk": 9,
     "fields": {
       "name": "Pu Erh Cinnamon Roll",
+      "slug": "pu-erh-cinnamon-roll",
       "description": "Delicious blend inspired by the famous 1920s dessert \"Cinnamon Roll\", with a more intense touch of cocoa. Ideal to enjoy at any time of the day, with or without a vegetable drink. A plan of 3 cups a day helps the body's depurative process. Pu Erh is a tea with low content of theine and special fermentation with purifying, antioxidant and also digestive properties, properties that can also be found in cinnamon and turmeric.",
       "ingredients": "Pu Erh red tea, cocoa shell, apple, cinnamon, cocoa, carob, turmeric, rose petals and marigold, aroma",
       "flavour": "Sweet, Spiced",
       "aroma": "Sweet, Spiced",
       "preparation": "Infusion 95 �C during 3-5 min",
-      "preview": "",
+      "preview": "images/tea/cinamon.jpg",
       "price": "8.95",
       "category": 2,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-17T10:00:22.955Z"
+      "last_change": "2023-11-24T22:03:16.098Z"
     }
   },
   {
@@ -148,17 +156,18 @@
     "pk": 10,
     "fields": {
       "name": "Green Tea Sencha",
+      "slug": "green-tea-sencha",
       "description": "A Sencha quality tea is defined when the two or three leaves are picked open and young. For this reason the colour of the dry tea is an intense green. Ideal for lovers of vegetable flavours with an astringent finish. Very tasty when hot and to accompany meals. In the Green tea highlights the polyphenols, vitamins, minerals and amino acids. The best known amino acid is L-theanine which helps in concentration.",
       "ingredients": "Chinese sencha green tea",
       "flavour": "Vegetal",
       "aroma": "Vegetal",
       "preparation": "Infusion 70 �C during 2 min",
-      "preview": "",
+      "preview": "images/tea/sencha.jpg",
       "price": "6.50",
       "category": 3,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-17T10:00:22.955Z"
+      "last_change": "2023-11-24T22:00:16.019Z"
     }
   },
   {
@@ -166,17 +175,18 @@
     "pk": 11,
     "fields": {
       "name": "Green Tea Oriental Lime",
+      "slug": "green-tea-oriental-lime",
       "description": "A tasty, intense tea with acid nuances that give notes of freshness. Perfect for having a healthy and refreshing drink at any time of the day. Green Tea is an antioxidant and detoxifier. Chamomile brings digestive power to the blend.",
       "ingredients": "Green tea, lemon, camomile, lime oil and aroma",
       "flavour": "Citrus",
       "aroma": "Fresh, Citrus",
       "preparation": "Infusion 75 �C during 2 min",
-      "preview": "",
+      "preview": "images/tea/lime.jpg",
       "price": "5.75",
       "category": 3,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-17T10:00:22.955Z"
+      "last_change": "2023-11-24T22:00:07.292Z"
     }
   },
   {
@@ -184,17 +194,18 @@
     "pk": 12,
     "fields": {
       "name": "Green Tea Yoga Tea",
+      "slug": "green-tea-yoga-tea",
       "description": "A blend where the characteristic taste of Gunpowder tea, slightly rough, is mixed with cinnamon, aniseed, ginger and fennel. A touch of liquorice, cloves and black pepper completes this highly appreciated blend. It's perfect for revitalizing and warming the body, plus it's low in theine. Green tea is a natural antioxidant. The spices are Ayurvedic and help strengthen the immune system.",
       "ingredients": "Mixture of Gunpowder green tea, organic cinnamon, aniseed, ginger, fennel, liquorice, clove, black pepper",
       "flavour": "Spiced",
       "aroma": "Spiced",
       "preparation": "Infusion 75 �C during 2 min",
-      "preview": "",
+      "preview": "images/tea/yoga.jpg",
       "price": "7.95",
       "category": 3,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-17T10:00:22.955Z"
+      "last_change": "2023-11-24T22:00:27.900Z"
     }
   },
   {
@@ -202,17 +213,18 @@
     "pk": 13,
     "fields": {
       "name": "Green Tea Ushuaia Ginger Citrus",
+      "slug": "green-tea-ushuaia-ginger-citrus",
       "description": "A unique blend that delights the most varied palates, both for lovers of sweet citrus, who seek the freshness of ginger, or for those who prefer the more herbal flavors of mate; all without dispensing with a rich source of antioxidants. Mate provides our body with energetic properties that help combat mental fatigue, while ginger acts to promote digestion.",
       "ingredients": "Green tea, green mate, ginger, matcha and aromas",
       "flavour": "Herby",
       "aroma": "Herby",
       "preparation": "Infusion 75 �C during 2 min",
-      "preview": "",
+      "preview": "images/tea/ushuaya.jpg",
       "price": "8.95",
       "category": 3,
       "in_stock": "in_stock",
       "time_created": "2023-11-17T10:00:22.955Z",
-      "last_change": "2023-11-17T10:00:22.955Z"
+      "last_change": "2023-11-24T22:00:42.120Z"
     }
   },
   {
@@ -220,17 +232,18 @@
     "pk": 14,
     "fields": {
       "name": "Oolong Tea Tie Kuan Yin",
+      "slug": "oolong-tea-tie-kuan-yin",
       "description": "One of the most appreciated Oolong teas in China, also known as Blue tea. Its sweet and toasted aroma and its digestive effect make it a delicacy to enjoy after meals. The theine content of Oolong tea is moderate and lower than that of other stimulating plants such as coffee. It is appreciated for its diuretic and digestive properties.",
       "ingredients": "Oolong tea from Fujian (China)",
       "flavour": "Sweet, Creamy",
       "aroma": "Sweet, Roasted",
       "preparation": "Infusion 85 �C during 3 min",
-      "preview": "",
+      "preview": "images/tea/Tie_Kuan_Yin.jpg",
       "price": "7.75",
       "category": 4,
       "in_stock": "in_stock",
       "time_created": "2023-11-18T12:46:39.745Z",
-      "last_change": "2023-11-18T12:46:39.745Z"
+      "last_change": "2023-11-24T22:02:33.245Z"
     }
   },
   {
@@ -238,17 +251,18 @@
     "pk": 15,
     "fields": {
       "name": "Milky Oolong Origin China",
+      "slug": "milky-oolong-origin-china",
       "description": "The dairy flavouring is added to the fresh leaves using a special technique at source, and then subjected to a short oxidation process. Its digestive properties make it perfect for all-day consumption. The theine content of Oolong tea is moderate and lower than that of other stimulating plants such as coffee. It is appreciated for its diuretic and digestive properties.",
       "ingredients": "Oolong tea from China, aroma",
       "flavour": "Sweet, Creamy",
       "aroma": "Sweet",
       "preparation": "Infusion 85 �C during 3 min",
-      "preview": "",
+      "preview": "images/tea/milky.jpg",
       "price": "8.50",
       "category": 4,
       "in_stock": "in_stock",
       "time_created": "2023-11-18T12:46:39.745Z",
-      "last_change": "2023-11-18T12:46:39.745Z"
+      "last_change": "2023-11-24T22:02:42.880Z"
     }
   },
   {
@@ -256,17 +270,18 @@
     "pk": 16,
     "fields": {
       "name": "Oolong Tea Spicy Strawberry",
+      "slug": "oolong-tea-spicy-strawberry",
       "description": "Captivating blend of Oolong tea with spices from Asia and the sweet touch of the strawberry. Oolong tea is also known as Blue tea and its digestive effect makes it ideal to enjoy after meals. The theine content of Oolong tea is moderate and lower than that of other stimulating plants such as coffee. It is appreciated for its diuretic and digestive properties.",
       "ingredients": "Oolong tea, green tea, carob, ginger, cinnamon, split star anise, pineapple, clove, strawberry, cornflower petals and aromas",
       "flavour": "Fruity, Spiced",
       "aroma": "Fruity, Spiced",
       "preparation": "Infusion 85 �C during 3 min",
-      "preview": "",
+      "preview": "images/tea/strawberry.jpg",
       "price": "8.95",
       "category": 4,
       "in_stock": "in_stock",
       "time_created": "2023-11-18T12:46:39.745Z",
-      "last_change": "2023-11-18T12:46:39.745Z"
+      "last_change": "2023-11-24T22:02:14.871Z"
     }
   },
   {
@@ -274,17 +289,18 @@
     "pk": 17,
     "fields": {
       "name": "Oolong Tea Azahar",
+      "slug": "oolong-tea-azahar",
       "description": "Semioxidized Oolong tea that helps digestion and maintains vitality during the day. The orange blossom accompanies this Oolong tea very well for its sweet and floral aromatic notes. The theine content of Oolong is moderate and lower than that of other stimulating plants such as coffee. It is appreciated for its diuretic and digestive properties.",
       "ingredients": "Oolong tea, orange blossom, orange oil, orange aroma",
       "flavour": "Floral, Citrus",
       "aroma": "Sweet",
       "preparation": "Infusion 85 �C during 3 min",
-      "preview": "",
+      "preview": "images/tea/orange.jpg",
       "price": "7.25",
       "category": 4,
       "in_stock": "in_stock",
       "time_created": "2023-11-18T12:46:39.745Z",
-      "last_change": "2023-11-19T16:58:28.407Z"
+      "last_change": "2023-11-24T22:02:23.430Z"
     }
   },
   {
@@ -292,17 +308,18 @@
     "pk": 18,
     "fields": {
       "name": "Rooibos Original",
+      "slug": "rooibos-original",
       "description": "Sweet, aromatic and without notes of astringency,  Rooibos Original is a natural drink for all ages. Its isotonic property makes it especially suitable for moments of physical activity. South African plant with multiple properties. Totally free of theine, low level of tannins and no calories. Its antioxidant power stands out with beneficial effects to calm intestinal discomfort. It improves the appearance of the skin, skin rashes and promotes sleep. It is an isotonic drink that helps rehydration.",
       "ingredients": "Rooibos",
       "flavour": "Sweet and mineralised, herby and with a smooth texture",
       "aroma": "Sweet",
       "preparation": "Infusion 95 �C during 5-10min",
-      "preview": "",
+      "preview": "images/tea/original.jpg",
       "price": "5.99",
       "category": 5,
       "in_stock": "in_stock",
       "time_created": "2023-11-18T13:10:48.281Z",
-      "last_change": "2023-11-18T13:10:48.281Z"
+      "last_change": "2023-11-24T22:03:50.307Z"
     }
   },
   {
@@ -310,17 +327,18 @@
     "pk": 19,
     "fields": {
       "name": "Rooibos African Sunset",
+      "slug": "rooibos-african-sunset",
       "description": "A sip full of taste and fantasy with orange, the sweetness of carrot and Rooibos. Sweet, aromatic and without notes of astringency, it is a natural drink for all ages. Its isotonic properties make it particularly suitable for times of physical activity. Rooibos is a South African plant theine-free and calorie-free, with multiple properties including isotonic, which helps to hydrate the body. It also has antioxidant power with beneficial effects to soothe intestinal discomfort. It improves the appearance of the skin, skin rashes and promotes sleep.",
       "ingredients": "Rooibos, orange, carrot, rose hip seed, orange oil, aroma",
       "flavour": "Citrus",
       "aroma": "Citrus",
       "preparation": "Infusion 95 �C during 5-10 min",
-      "preview": "",
+      "preview": "images/tea/african.jpg",
       "price": "6.95",
       "category": 5,
       "in_stock": "in_stock",
       "time_created": "2023-11-18T13:13:00.145Z",
-      "last_change": "2023-11-18T13:13:00.145Z"
+      "last_change": "2023-11-24T22:04:06.904Z"
     }
   },
   {
@@ -328,17 +346,18 @@
     "pk": 20,
     "fields": {
       "name": "Rooibos Turkish Delight",
+      "slug": "rooibos-turkish-delight",
       "description": "Rooibos aromatically sweet that takes us to the pastry shop in Turkey, where traditions of east and west intermingle creating astral flavors. An Infusion without theine, where nuts star the flavor with caramelized notes.",
       "ingredients": "Rooibos, carob, crunchy hazelnuts and macadamia, almonds, barley grass and pistachio",
       "flavour": "Sweet",
       "aroma": "Sweet",
       "preparation": "Infusion 95 �C during 5-10 min",
-      "preview": "",
+      "preview": "images/tea/turkish.jpg",
       "price": "7.50",
       "category": 5,
       "in_stock": "in_stock",
       "time_created": "2023-11-18T13:17:40.514Z",
-      "last_change": "2023-11-18T13:17:40.514Z"
+      "last_change": "2023-11-24T22:04:14.032Z"
     }
   },
   {
@@ -346,17 +365,18 @@
     "pk": 21,
     "fields": {
       "name": "Rooibos Safari",
+      "slug": "rooibos-safari",
       "description": "Sweet, aromatic and without notes of astringency, it is a natural drink for all ages. Its isotonic property makes it especially suitable for moments of physical activity. Rooibos is a South African plant, theine-free and calorie-free, with multiple properties, including isotonic, which helps to hydrate the body. It also has antioxidant power with beneficial effects to soothe intestinal discomfort. It improves the appearance of the skin, skin rashes and promotes sleep.",
       "ingredients": "Rooibos, coconut, chocolate, aroma",
       "flavour": "Sweet",
       "aroma": "Sweet",
       "preparation": "Infusion 95 �C during 5-6 min",
-      "preview": "",
+      "preview": "images/tea/safari2.jpg",
       "price": "5.95",
       "category": 5,
       "in_stock": "in_stock",
       "time_created": "2023-11-18T13:20:05.495Z",
-      "last_change": "2023-11-18T13:20:05.495Z"
+      "last_change": "2023-11-24T22:03:43.318Z"
     }
   },
   {
@@ -364,17 +384,18 @@
     "pk": 22,
     "fields": {
       "name": "Herbal Tea Magic Forest",
+      "slug": "herbal-tea-magic-forest",
       "description": "An infusion of fruity taste with the fresh touch of mint, very pleasant to the palate accompanied by a sour note of hibiscus. It quenches thirst, accompanies meals very well and with its sweet taste can be prepared both hot and cold.A diuretic blend of ingredients without theine. Hibiscus or karkad� contains properties that promote vitality and help reduce mental and physical fatigue. Chamomile has a relaxing and soothing effect in case of throat irritation.",
       "ingredients": "apple, hibiscus, blackberry and raspberry leaves, chamomile, sunflower petals, raspberry, mints, aroma",
       "flavour": "Sweet",
       "aroma": "Sweet",
       "preparation": "Infusion 95 �C during 5-6 min",
-      "preview": "",
+      "preview": "images/tea/forest.jpg",
       "price": "6.05",
       "category": 6,
       "in_stock": "in_stock",
       "time_created": "2023-11-20T08:38:46.430Z",
-      "last_change": "2023-11-20T10:14:31.343Z"
+      "last_change": "2023-11-24T22:01:09.624Z"
     }
   },
   {
@@ -382,17 +403,18 @@
     "pk": 23,
     "fields": {
       "name": "Honeybush Original",
+      "slug": "honeybush-original",
       "description": "Honeybush is an indigenous plant from South Africa, without theine with an outstanding aroma of honey. This plant shares similarities with Rooibos, but has a milder flavor than this. Without notes of astringency, like the Rooibos it gives a reputation of natural drink for all ages. Its isotonic property makes it especially indicated at times of physical activity. Highlights its antioxidant power with beneficial effects to soothe intestinal and stomach discomfort, natural antihistamine, improves the appearance of skin and skin rashes and promotes sleep. Totally free of theine, poor in tannins and no calories. Because of its high content of minerals (iron, calcium, copper, potassium, manganese, magnesium, fluorine, sodium) is an isotonic drink that helps rehydration.",
       "ingredients": "Honeybush",
       "flavour": "Sweet",
       "aroma": "Sweet",
       "preparation": "Infusion 95 �C during 5-6 min",
-      "preview": "",
+      "preview": "images/tea/honeybush.jpg",
       "price": "3.25",
       "category": 6,
       "in_stock": "in_stock",
       "time_created": "2023-11-20T08:43:23.504Z",
-      "last_change": "2023-11-20T10:14:02.204Z"
+      "last_change": "2023-11-24T22:00:58.117Z"
     }
   },
   {
@@ -400,17 +422,18 @@
     "pk": 24,
     "fields": {
       "name": "Herbal Tea Ayurveda Balance",
+      "slug": "herbal-tea-ayurveda-balance",
       "description": "Ayurvedic medicine, traditional in India, proposes medicinal plants and spices such as fennel, ginger and turmeric as part of its wellness culture. Among the functionalities attributed to these plants are the activation of the metabolism, stimulation of the circulation and improvement of digestion.",
       "ingredients": "Sweet fennel, ginger, chamomile, peppermint, cinnamon, turmeric, star anise",
       "flavour": "Sweet",
       "aroma": "Sweet, Spiced",
       "preparation": "Infusion 95 �C during 8-10 min",
-      "preview": "",
+      "preview": "images/tea/aurveda.jpg",
       "price": "8.99",
       "category": 6,
       "in_stock": "in_stock",
       "time_created": "2023-11-20T10:16:24.292Z",
-      "last_change": "2023-11-20T10:16:24.292Z"
+      "last_change": "2023-11-24T22:01:20.503Z"
     }
   },
   {
@@ -418,17 +441,18 @@
     "pk": 25,
     "fields": {
       "name": "Herbal Tea Super Turmeric",
+      "slug": "herbal-tea-super-turmeric",
       "description": "A drink with a vivid colour and a strong aromatic personality. A wise alchemy between pleasure and health, with a balanced sweetness and light spicy notes. The warmth of turmeric, star anise and cinnamon envelops the sweetness of apple and almond. An energising infusion to combat fatigue and theine-free. Its warm, slightly spicy taste makes it perfect as an infusion or decoction, to be enjoyed at any time of the day, either hot or with ice. By adding milk or vegetable drink we obtain a perfect natural \"Golden milk\" full of Ayurvedic properties. The dry infusion can be used to season typical Indian dishes. A tonic and stimulating theine-free infusion with multiple health benefits: it stimulates circulation, promotes digestion, is antioxidative and helps to maintain a healthy cardiovascular and immune system, thanks to the combination of Ayurvedic spices, fruit and nuts.",
       "ingredients": "Apple, turmeric, ginger, cinnamon, almond, nutmeg, star anise, cloves, aroma",
       "flavour": "Sweet, Spiced",
       "aroma": "Sweet, Spiced",
       "preparation": "Infusion 95 �C during 8-10 min",
-      "preview": "",
+      "preview": "images/tea/tumeric.jpg",
       "price": "10.50",
       "category": 6,
       "in_stock": "in_stock",
       "time_created": "2023-11-20T10:18:23.063Z",
-      "last_change": "2023-11-20T10:18:23.063Z"
+      "last_change": "2023-11-24T22:01:27.062Z"
     }
   },
   {
@@ -438,7 +462,7 @@
       "name": "Black tea",
       "slug": "black-tea",
       "description": "Black tea is known for its amber colour, with an intense body and flavour that the biggest tea enthusiasts enjoy. One of the main characteristics that distinguishes this tea from the rest is its increased oxidation, which is why its theine content and aroma are greater than those of other teas, such as green, oolong and white tea.",
-      "image": ""
+      "image": "images/types/black.jpg"
     }
   },
   {
@@ -448,7 +472,7 @@
       "name": "Pu-erh tea",
       "slug": "puerh-tea",
       "description": "Pu-erh or red tea is an age-old natural drink used for centuries in oriental ceremonies and rituals, and also as a diuretic and medicinal drink. Red tea is obtained from an ancient plant, which was already used at the beginning of the Han dynasty in China. Thanks to its beneficial effects discovered at the time, red herbal tea remains, one of the most valued tea varieties in China.",
-      "image": ""
+      "image": "images/types/pu-erh.jpg"
     }
   },
   {
@@ -458,7 +482,7 @@
       "name": "Green tea",
       "slug": "green-tea",
       "description": "There are many reasons why green tea is a perfect natural drink for looking after our bodies. In addition to its properties and benefits for our health, it is smooth and delicate, ideal for any time of day. Another of the qualities of green tea that has made this drink a favourite for many lovers of herbal teas is its ability to be combined perfectly with any other ingredient.",
-      "image": ""
+      "image": "images/types/green.jpg"
     }
   },
   {
@@ -468,7 +492,7 @@
       "name": "Oolong",
       "slug": "oolong",
       "description": "Oolong tea, also known as semi-fermented tea, is a Chinese variety of tea that lies somewhere between black tea and green tea. It is a kind of tea that preserves whole tea leaves and that is made through a partial oxidation process, allowing it to preserve and maintain a multitude of properties and benefits. Oolong has a balanced and lightly toasted flavour with orange ochre colours.",
-      "image": ""
+      "image": "images/types/oolong.jpg"
     }
   },
   {
@@ -478,7 +502,7 @@
       "name": "Rooibos",
       "slug": "rooibos",
       "description": "Rooibos tea does not contain theine, but maintains an intense flavour at the same time, is one of the most well-known and popular herbal teas of all. Rooibos herbal tea is obtained from a shrub on the South African coast through the fermentation of its leaves. This fermentation makes rooibos tea take on a reddish colour in the majority of its compositions.",
-      "image": ""
+      "image": "images/types/roiboos.jpg"
     }
   },
   {
@@ -488,7 +512,7 @@
       "name": "Herbal tea",
       "slug": "herbal-tea",
       "description": "Herbs and spices have been used as natural medicines for centuries and many come bursting with incredible healing properties. Full of antioxidants, endless vitamins, and minerals, herbal tea is your golden ticket to skipping out on cold and flu season. For those who are experiencing high levels of stress or feel close to burnout, drinking a cup of tea could be a helpful solution.",
-      "image": ""
+      "image": "images/types/herbal.jpg"
     }
   }
 ]

@@ -1,15 +1,15 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from .models import TeaCategory, TeaProduct
+from .templatetags.main_tags import get_random_products
+
 
 import json
 
 
-# Create your views here.
 def index(request):
-    last_5 = TeaProduct.objects.order_by('time_created')[:5]
-    print(*[i for i in last_5], sep=', ')
-    return render(request, 'main/index.html')
+    random_products = get_random_products()
+    return render(request, 'main/index.html', {'random_products': random_products})
 
 
 def contact(request):
@@ -47,6 +47,12 @@ def category(request, type_slug):
     in_stock_products = TeaProduct.stock_objects.filter(category=tea_type, in_stock=TeaProduct.Status.IN_STOCK)
     data = {'category': tea_type, 'in_stock': in_stock_products}
     return render(request, 'main/category.html', data)
+
+
+def product(request, type_slug, item_slug):
+    cat = get_object_or_404(TeaCategory, slug=type_slug)
+    prod = get_object_or_404(TeaProduct, slug=item_slug, category=cat)
+    return render(request, 'main/product.html', {'category': cat, 'product': prod})
 
 
 def page_not_found(request, exception):
