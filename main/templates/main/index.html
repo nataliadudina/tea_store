@@ -23,46 +23,24 @@
     <div class="container-xxl">
         <div id="carouselExampleCaptions" class="carousel slide">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
+                {% for slide in slides %}
+                <button type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide-to="{{ forloop.counter0 }}"
+                        {% if forloop.first %}class="active" {% endif %}
+                        aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active custom-slide">
+                {% for slide in slides %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %} custom-slide">
                     <div class="img-container">
-                        <img src="{% static 'main/images/slide1.jpg' %}"
-                             class="d-block w-100" alt="quiet contemplation">
+                        <img src="{% static slide.img %}" class="d-block w-100" alt="{{ slide.alt }}">
                     </div>
                     <div class="carousel-caption d-none d-md-block">
-                        <p class="custom-text"><strong>"There is something in the nature <br>of tea that leads us into a
-                            world <br>of quiet contemplation of
-                            life." <br>- Lin Yutang.</strong></p>
+                        <p class="custom-text" style="color: {{ slide.text_color }}"><strong>{{ slide.text|safe }}</strong></p>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="img-container">
-                        <img src="{% static 'main/images/slide2.jpg' %}"
-                             class="d-block w-100" alt="wisdom in every sip">
-                    </div>
-                    <div class="carousel-caption d-none d-md-block">
-                        <p>"Tea is the perfect blend of warmth, comfort, <br>and wisdom in every sip." <br>- Arthur Wing
-                            Pinero</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="img-container">
-                        <img src="{% static 'main/images/slide3.jpg' %}"
-                             class="d-block w-100" alt="warming inside">
-                    </div>
-                    <div class="carousel-caption d-none d-md-block">
-                        <p>"A cup of tea is like a gentle hug for the soul, <br>warming you from the inside out." <br>-
-                            Aaron
-                            Fisher</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
                     data-bs-slide="prev">
@@ -79,15 +57,15 @@
 </section>
 
 <div>
-   <h5 class="text-center text-black">
-       Discover our range of teas from dark and intense, to bright and subtle to the rose-petal romantic.<br>
-       <a href="{% url 'catalog' %}">
-           <img src="{% static 'main/images/icon-tea-leaves.png' %}" alt="Tea leaves" width="30" height="30"
-                     style="margin: 0 0;">
-           Explore all tea types
-       <img src="{% static 'main/images/icon-tea-leaves.png' %}" alt="Tea leaves" width="30" height="30"
-                     style="margin: 0 0;"></a>
-   </h5>
+    <h5 class="text-center text-black">
+        Discover our range of teas from dark and intense, to bright and subtle to the rose-petal romantic.<br>
+        <a href="{% url 'catalog' %}">
+            <img src="{% static 'main/images/icon-tea-leaves.png' %}" alt="Tea leaves" width="30" height="30"
+                 style="margin: 0 0;">
+            Explore all tea types
+            <img src="{% static 'main/images/icon-tea-leaves.png' %}" alt="Tea leaves" width="30" height="30"
+                 style="margin: 0 0;"></a>
+    </h5>
 </div>
 
 <!-- Random sample of 4 products -->
@@ -97,8 +75,8 @@
         {% for item in items %}
         <div class="card" style="width: 19rem; margin: 10px; text-align: justify;">
             <a href="{% url 'product' type_slug=item.category.slug item_slug=item.slug %}">
-            <img src="{% imagepath_tag item.preview %}" class="card-img-top"
-                 alt="...">
+                <img src="{% imagepath_tag item.preview %}" class="card-img-top"
+                     alt="...">
             </a>
             <div class="card-body"
                  style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">

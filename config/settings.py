@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'main.apps.MainConfig',
+    'store_blog.apps.StoreBlogConfig',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'main.context_processors.tea_categories',    # context processors for tea categories
+                'main.context_processors.tea_categories',  # context processors for tea categories
             ],
         },
     },

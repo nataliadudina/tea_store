@@ -24,9 +24,10 @@ from main.views import page_not_found
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('main.urls')),  # add the list of URLs from app/urls.py
+                  path('blog/', include('store_blog.urls')),
               ] + static(settings.MEDIA_URL,
                          document_root=settings.MEDIA_ROOT)  # for static: from django.conf.urls.static import static
-                                                             # for settings: from django.conf import settings
+# for settings: from django.conf import settings
 
 handler404 = page_not_found  # 404 error handling
 

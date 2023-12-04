@@ -14,7 +14,7 @@ class TeaCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(TeaProduct)
 class TeaProductAdmin(admin.ModelAdmin):
-    fields = ['name', 'preview', 'show_preview', 'price', 'category', 'in_stock']
+    fields = ['name', 'description', 'preview', 'show_preview', 'ingredients', 'flavour', 'aroma', 'preparation', 'price', 'category', 'in_stock']
     list_display = ('name', 'show_preview', 'price', 'category', 'in_stock',)
     list_display_links = ('name',)
     list_editable = ('price', 'in_stock',)
@@ -25,6 +25,7 @@ class TeaProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description', 'category__name',)    # includes search by category name
     list_select_related = ('category',)  # pre-loads related categories
     actions = ['set_status_in_stock', 'set_status_out_of_stock']
+    save_on_top = True
 
     @admin.display(description='Preview')
     def show_preview(self, item: TeaProduct):
