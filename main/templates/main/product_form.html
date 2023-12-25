@@ -1,0 +1,41 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<form method="post" class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                {% if object %}
+                Edit the card
+                {% else %}
+                Add new card
+                {% endif %}
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-outline-success">
+                    {% if object %}
+                    Save
+                    {% else %}
+                    Add
+                    {% endif %}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                Heritage
+            </div>
+            <div class="card-body">
+                {{ formset.management_form }}
+                {% for form in formset.forms %}
+                {{ form.as_p }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

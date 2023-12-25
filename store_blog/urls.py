@@ -7,7 +7,7 @@ app_name = StoreBlogConfig.name
 urlpatterns = [
     path('create/', ArticleCreateView.as_view(), name='create'),
     path('', BlogListView.as_view(), name='list'),  # list of articles
-    path('read/<int:pk>/', ArticleDetailView.as_view(), name='view'),
-    path('edit/<int:pk>/', ArticleUpdateView.as_view(), name='update'),
-    path('delete/<int:pk>/', ArticleDeleteView.as_view(), name='delete'),
+    path('read/<slug:slug>/', ArticleDetailView.as_view(), name='view'),
+    path('edit/<slug:slug>/', ArticleUpdateView.as_view(), name='update'),
+    path('delete/<slug:slug>/', ArticleDeleteView.as_view(), name='delete'),
 ]

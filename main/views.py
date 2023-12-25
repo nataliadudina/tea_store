@@ -2,8 +2,9 @@ from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from .models import TeaCategory, TeaProduct
 from .templatetags.main_tags import get_random_products
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.views import View
+from .forms import ProductForm
 
 
 import json
@@ -157,6 +158,13 @@ class ProductDetailView(DetailView):
         cat = get_object_or_404(TeaCategory, slug=type_slug)
         context['category'] = cat
         return context
+
+
+class ProductCreateView(CreateView):
+    model = TeaProduct
+    form_class = TeaProductForm
+    template_name = 'main/product_create.html'
+    success_url = reverse_lazy('main:product')
 
 
 def page_not_found(request, exception):

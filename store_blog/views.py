@@ -8,7 +8,7 @@ from store_blog.models import Article
 
 class ArticleCreateView(CreateView):
     model = Article
-    fields = ('title', 'content', 'image', 'publication')
+    fields = ('title', 'content', 'author', 'image', 'publication')
     success_url = reverse_lazy('store_blog:list')
 
     def form_valid(self, form):
@@ -46,21 +46,8 @@ class ArticleDetailView(DetailView):
 
 class ArticleUpdateView(UpdateView):
     model = Article
-    fields = ('title', 'content', 'image',)
+    fields = ('title', 'content', 'author', 'image',)
     success_url = reverse_lazy('store_blog:list')
-
-    def form_valid(self, form):
-        if form.is_valid:
-            new_article = form.save()
-            new_article.slug = slugify(new_article.title)
-            new_article.save()
-
-            image = form.cleaned_data['image']
-            if image:
-                new_article.image = image
-                new_article.save()
-
-            return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('store_blog:view', args=[self.kwargs.get('pk')])

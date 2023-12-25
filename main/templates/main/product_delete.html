@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<form method="post" class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header">
+                {% if object %}
+                Edit the card
+                {% else %}
+                Delete the card
+                {% endif %}
+            </div>
+            <div class="card-body">
+                {% csrf_token %}
+                <p>Do you want to delete the card for {{ object.object_name }}?</p>
+                <button type="submit" class="btn btn-outline-danger">
+                    Delete
+                </button>
+                <a class="btn btn-outline-warning" href="{% url 'dogs:category_dogs' object.breed.pk %}">Cancel</a>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

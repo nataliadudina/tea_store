@@ -73,3 +73,15 @@ class TeaCategory(models.Model):
 
     def get_absolute_url(self):
         return reverse('types', kwargs={'type_slug': self.slug})
+
+
+class Version(models.Model):
+    product = models.ForeignKey(TeaProduct, on_delete=models.CASCADE)
+    version_name = models.CharField(max_length=255)
+    is_active = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.product} - Version {self.version_name}"
+
+    class Meta:
+        unique_together = ['product', 'version_name']
