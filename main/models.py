@@ -2,7 +2,6 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
-
 NULLABLE = {'blank': True, 'null': True}
 
 
@@ -17,7 +16,7 @@ class TeaProduct(models.Model):
         IN_STOCK = 'in_stock', 'In Stock'
         OUT_OF_STOCK = 'out_of_stock', 'Out of Stock'
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='Title')
     slug = models.SlugField(max_length=100, db_index=True, unique=True)
     description = models.TextField(**NULLABLE)
     ingredients = models.CharField(max_length=255, **NULLABLE)
@@ -43,7 +42,7 @@ class TeaProduct(models.Model):
         """Generates slug from model's name"""
         if not self.slug:
             self.slug = slugify(self.name)
-        super().save(*args, **kwargs)    # calls save method of the parent class to save the changes to the db
+        super().save(*args, **kwargs)  # calls save method of the parent class to save the changes to the db
 
     def __str__(self):
         return self.name
@@ -53,7 +52,7 @@ class TeaProduct(models.Model):
         verbose_name_plural = 'items'
         # ordering = ['-price']
 
-    def get_absolute_url(self):    # не работает
+    def get_absolute_url(self):  # не работает
         return reverse('product', kwargs={'type_slug': self.category.slug, 'item_slug': self.slug})
 
 
@@ -77,11 +76,15 @@ class TeaCategory(models.Model):
 
 class Version(models.Model):
     product = models.ForeignKey(TeaProduct, on_delete=models.CASCADE)
+    version_number = models.CharField(max_length=10)
     version_name = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=False)
+    text = models.TextField(blank=True)
+    is_active = models.BooleanField(default=False, verbose_name='active version')
 
     def __str__(self):
         return f"{self.product} - Version {self.version_name}"
 
     class Meta:
+        verbose_name = 'version'
+        verbose_name_plural = 'versions'
         unique_together = ['product', 'version_name']

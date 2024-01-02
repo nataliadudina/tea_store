@@ -1,5 +1,5 @@
 from django.contrib import admin, messages
-from main.models import TeaProduct, TeaCategory
+from main.models import TeaProduct, TeaCategory, Version
 from django.utils.safestring import mark_safe
 
 
@@ -10,6 +10,7 @@ class TeaCategoryAdmin(admin.ModelAdmin):
     ordering = ['name']
     list_filter = ('name',)
     search_fields = ('pk', 'name',)
+    save_on_top = True
 
 
 @admin.register(TeaProduct)
@@ -40,3 +41,9 @@ class TeaProductAdmin(admin.ModelAdmin):
     def set_status_out_of_stock(self, request, queryset):
         count = queryset.update(in_stock=TeaProduct.Status.OUT_OF_STOCK)
         self.message_user(request, f'The status of {count} items set to "out of stock".', messages.WARNING)
+
+
+@admin.register(Version)
+class VersionAdmin(admin.ModelAdmin):
+    list_display = ('product', 'version_name')
+    list_filter = ('product', 'version_name',)

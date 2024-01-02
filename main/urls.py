@@ -16,7 +16,7 @@ urlpatterns = [
     path('catalog/', CatalogListView.as_view(), name='catalog'),  # all product types
     path('catalog/<slug:type_slug>/', CategoryListView.as_view(), name='types'),  # product type
     path('catalog/<slug:type_slug>/<slug:item_slug>/', ProductDetailView.as_view(), name='product'),  # product page
-    path('<int:pk>/product/new/', ProductCreateView.as_view(), name='product_form'),
-    path('product/update/<int:pk>/', ProductUpdateView.as_view(), name='product_edit'),
-    path('product/delete/<int:pk>', ProductDeleteView.as_view(), name='product_delete')
+    path('new/', ProductCreateView.as_view(), name='product_form'),
+    path('<slug:slug>/update/', ProductUpdateView.as_view(), name='product_edit'),
+    path('<slug:slug>/delete/', ProductDeleteView.as_view(), name='product_delete')
 ]

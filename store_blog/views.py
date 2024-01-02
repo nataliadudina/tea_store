@@ -29,6 +29,7 @@ class BlogListView(ListView):
     model = Article
     template_name = 'store_blog/blog.html'
     context_object_name = 'articles'
+    extra_context = {'title': 'Tea Blog'}
 
     def get_queryset(self, *args, **kwargs):
         return Article.objects.filter(publication=Article.Status.PUBLISHED)

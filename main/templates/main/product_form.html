@@ -1,20 +1,23 @@
-{% extends "main/base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<form method="post" class="row">
-    <div class="col-6">
+
+{% include 'includes/background_section.html' %}
+
+<form method="post" class="row justify-content-center" enctype="multipart/form-data">
+    <div class="col-md-5" style="padding-top: 20px;">
         <div class="card">
             <div class="card-header">
                 {% if object %}
-                Edit the card
+                <h6 class="text-center">Edit the card</h6>
                 {% else %}
-                Add new card
+                <h6 class="text-center">Product information</h6>
                 {% endif %}
             </div>
             <div class="card-body">
                 {% csrf_token %}
                 {{ form.as_p }}
-                <button type="submit" class="btn btn-outline-success">
+                <button type="submit" class="btn btn-outline-success" style="float: right;">
                     {% if object %}
                     Save
                     {% else %}
@@ -24,18 +27,23 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+
+    <div class="col-md-5" style="padding-top: 20px;">
         <div class="card">
             <div class="card-header">
-                Heritage
+                <h6 class="text-center">Version</h6>
             </div>
             <div class="card-body">
                 {{ formset.management_form }}
-                {% for form in formset.forms %}
+                {% for form in formset %}
                 {{ form.as_p }}
+                {% if not forloop.last %}
+                <hr>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
     </div>
 </form>
+
 {% endblock %}

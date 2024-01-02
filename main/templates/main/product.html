@@ -4,7 +4,7 @@
 {% load main_tags %}
 
 {% block content %}
-    <title>Tea Choice</title>
+<title>Tea Choice</title>
 
 <div><h2 class="text-center text-black">Explore and experience <em>{{ product.name }}</em></h2></div>
 <section>
@@ -16,19 +16,34 @@
                          class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-md-5">
-                    <div class="card-body">
+                    <div class="card-body p-0">
+
+                        {% if active_version %}
+                        <h4 class="card-title"><strong>{{ product.name }} - {{ active_version.version_name }}</strong></h4>
+                        <p class="card-text" style="text-align: justify;"> <mark><bold>{{ active_version.text }}</bold></mark><br>
+                         {{ product.description }} </p>
+                        {% else %}
                         <h4 class="card-title"><strong>{{ product.name }}</strong></h4>
                         <p class="card-text" style="text-align: justify;">{{ product.description }}</p>
+                        {% endif %}
+
                         <p class="card-text"><strong>Ingredients:</strong><br>{{ product.ingredients }}</p>
                         <p class="card-text"><strong>Flavour:</strong><br>{{ product.flavour }}</p>
                         <p class="card-text"><strong>Aroma:</strong><br>{{ product.aroma }}</p>
                         <p class="card-text"><strong>Preparation method:</strong><br>{{ product.preparation }}</p>
                         <p class="card-text"><strong>Price:</strong><br>{{ product.price }}$</p>
                     </div>
-                    <ul style="position: absolute; bottom: 0; list-style-type: none;">
-               <li><a href="{{ category.get_absolute_url }}">Back to {{ product.category }}</a></li>
-               <li><a href="{% url 'catalog' %}">To all tea types</a></li>
-             </ul>
+                    <br>
+
+                    <!-- Buttons for editing, deleting, viewing articles -->
+                    <a href="{% url 'product_edit' slug=product.slug %}">Edit</a> |
+                    <a href="{% url 'product_delete' slug=product.slug %}">Delete</a>
+                    <br><br>
+
+                    <ul style="list-style-type: disc; padding-inline-end: 20px;">
+                        <li><a href="{{ category.get_absolute_url }}">Back to {{ product.category }}</a></li>
+                        <li><a href="{% url 'catalog' %}">To all tea types</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

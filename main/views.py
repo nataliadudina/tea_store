@@ -1,10 +1,12 @@
 from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
-from .models import TeaCategory, TeaProduct
+from .models import TeaCategory, TeaProduct, Version
 from .templatetags.main_tags import get_random_products
+from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.views import View
-from .forms import ProductForm
+from .forms import ProductForm, VersionForm
+from django.forms import inlineformset_factory
 
 
 import json
@@ -97,7 +99,7 @@ def contact(request):
             json.dump(user_data, f, ensure_ascii=False)
             f.write('\n')
 
-    return render(request, 'main/contact.html')
+    return render(request, 'main/contact.html', {'title': 'Contact Tea Shop'})
 
 
 # def catalog(request):
@@ -106,6 +108,16 @@ def contact(request):
 class CatalogListView(ListView):
     model = TeaProduct
     template_name = 'main/catalog.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        products = context['object_list']
+
+        for product in products:
+            active_version = Version.objects.filter(product=product, is_active=True).first()
+            product.active_version = active_version
+
+        return context
 
 
 # def category(request, type_slug):
@@ -157,14 +169,94 @@ class ProductDetailView(DetailView):
         type_slug = self.kwargs.get('type_slug')
         cat = get_object_or_404(TeaCategory, slug=type_slug)
         context['category'] = cat
+
+        product = context['object']   # Get product object
+        active_version = Version.objects.filter(product=product, is_active=True).first()    # Get product active version
+        context['active_version'] = active_version
         return context
 
 
 class ProductCreateView(CreateView):
     model = TeaProduct
-    form_class = TeaProductForm
-    template_name = 'main/product_create.html'
-    success_url = reverse_lazy('main:product')
+    form_class = ProductForm
+    template_name = 'main/product_form.html'
+    extra_context = {'title': 'Adding a new product'}
+
+    def get_success_url(self):
+        type_slug = self.object.category.slug
+        item_slug = self.object.slug
+        return reverse('product', kwargs={'type_slug': type_slug, 'item_slug': item_slug})
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        version_formset = inlineformset_factory(TeaProduct, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = version_formset(self.request.POST)
+        else:
+            context_data['formset'] = version_formset()
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
+        
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+        return super().form_valid(form)
+
+
+class ProductUpdateView(UpdateView):
+    model = TeaProduct
+    form_class = ProductForm
+    template_name = 'main/product_form.html'
+    extra_context = {'title': 'Editing product information'}
+
+    def get_success_url(self):
+        type_slug = self.object.category.slug
+        item_slug = self.object.slug
+        return reverse('product', kwargs={'type_slug': type_slug, 'item_slug': item_slug})
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        version_formset = inlineformset_factory(TeaProduct, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = version_formset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = version_formset(instance=self.object)
+
+        # Adds version and active version into the context
+        context_data['versions'] = Version.objects.filter(product=self.object)
+        context_data['active_version'] = Version.objects.filter(product=self.object, is_active=True)
+
+        return context_data
+
+    def form_valid(self, form):
+        formset = self.get_context_data()['formset']
+        self.object = form.save()
+        if formset.is_valid():
+            formset.instance = self.object
+            formset.save()
+
+            # Finds an active version and sets flag True
+            active_version = self.request.POST.getlist('is_active')
+            # Version.objects.filter(product=self.object, id__in=active_version)
+
+            if active_version:
+                # Only update active versions if at least one is selected
+                Version.objects.filter(product=self.object).update(is_active=False)
+                Version.objects.filter(product=self.object, id__in=active_version).update(is_active=True)
+
+        return super().form_valid(form)
+
+
+class ProductDeleteView(DeleteView):
+    model = TeaProduct
+    template_name = 'main/product_confirm_delete.html'
+
+    def get_success_url(self):
+        type_slug = self.object.category.slug    # Get type_slug
+        return reverse('types', kwargs={'type_slug': type_slug})
 
 
 def page_not_found(request, exception):
