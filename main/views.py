@@ -4,6 +4,7 @@ from .models import TeaCategory, TeaProduct, Version
 from .templatetags.main_tags import get_random_products
 from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .forms import ProductForm, VersionForm
 from django.forms import inlineformset_factory
@@ -176,7 +177,7 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = TeaProduct
     form_class = ProductForm
     template_name = 'main/product_form.html'
@@ -198,15 +199,20 @@ class ProductCreateView(CreateView):
 
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
-        self.object = form.save()
+
+        # self.object = form.save(commit=False)    # without saving the data to a database
+        # self.object.author = self.request.user   # assign the current user as author
+
+        self.object = form.save()   # delete
         
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
+
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = TeaProduct
     form_class = ProductForm
     template_name = 'main/product_form.html'
@@ -250,7 +256,7 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = TeaProduct
     template_name = 'main/product_confirm_delete.html'
 
