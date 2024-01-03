@@ -1,15 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% include 'includes/title.html' %}
-
-<section class="background-section">
-    <div class="container-xxl">
-        <div class="col-12">
-            <h1 class="text-center text-black">{{ title }}</h1>
-        </div>
-    </div>
-</section>
+{% include 'includes/background_section.html' %}
 
 <div class="container">
     <div class="row justify-content-center align-items-center" style="height: 60vh;">
@@ -34,6 +26,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock %}

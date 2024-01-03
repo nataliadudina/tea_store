@@ -10,7 +10,7 @@ from store_blog.models import Article
 class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
     fields = ('title', 'content', 'author', 'image', 'publication')
-    extra_context = {'title': 'New Article'}
+    extra_context = {'page_title': 'TeaBlog: write', 'title': 'Writing a story'}
     success_url = reverse_lazy('store_blog:list')
 
     def form_valid(self, form):
@@ -32,7 +32,7 @@ class BlogListView(ListView):
     model = Article
     template_name = 'store_blog/blog.html'
     context_object_name = 'articles'
-    extra_context = {'title': 'Tea Blog'}
+    extra_context = {'page_title': 'TeaBlog'}
 
     def get_queryset(self, *args, **kwargs):
         return Article.objects.filter(publication=Article.Status.PUBLISHED)
@@ -40,6 +40,7 @@ class BlogListView(ListView):
 
 class ArticleDetailView(DetailView):
     model = Article
+    extra_context = {'page_title': 'TeaBlog: read'}
 
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
@@ -51,7 +52,7 @@ class ArticleDetailView(DetailView):
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
     fields = ('title', 'content', 'author', 'image',)
-    extra_context = {'title': 'Edit Article'}
+    extra_context = {'page_title': 'TeaBlog: edit', 'title': 'Updating the story'}
     success_url = reverse_lazy('store_blog:list')
 
     def get_success_url(self):
@@ -61,6 +62,6 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
 class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     model = Article
     template_name = 'store_blog/article_delete.html'
-    extra_context = {'title': 'Delete Article'}
+    extra_context = {'page_title': 'TeaBlog', 'title': 'Delete the story'}
     success_url = reverse_lazy('store_blog:list')
 
