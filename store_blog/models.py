@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.text import slugify
 
@@ -10,7 +11,7 @@ class Article(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title')
     slug = models.CharField(max_length=100, unique=True, db_index=True)
     content = models.TextField(blank=True, null=True, db_index=True)
-    author = models.CharField(max_length=100, blank=True, null=True)
+    author = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, related_name='posts', null=True, default=None)
     image = models.ImageField(upload_to='images/blog/', blank=True, null=True)
     time_created = models.DateTimeField(auto_now_add=True)
     publication = models.CharField(

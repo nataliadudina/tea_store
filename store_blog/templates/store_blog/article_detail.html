@@ -17,7 +17,7 @@
                 <div class="col-md-5">
                     <div class="card-body">
                         <p class="card-text" style="text-align: justify;">{{ article.content|linebreaks }}</p>
-                        <p style="text-align: right;">{{ article.author }}</p>
+                        <p style="text-align: right;"><b>Author:</b> {{ article.author.first_name|default:"unknown" }}</p>
                         <p style="text-align: right;"><b>Published:</b> {{ article.time_created|date:"F j, Y" }}</p>
                     </div>
                     <ul style="margin: 0; padding: 0; text-align: left;">

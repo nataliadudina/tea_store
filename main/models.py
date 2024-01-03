@@ -87,4 +87,4 @@ class Version(models.Model):
     class Meta:
         verbose_name = 'version'
         verbose_name_plural = 'versions'
-        unique_together = ['product', 'version_name']
+        unique_together = (('product', 'version_number'),)
