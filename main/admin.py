@@ -45,5 +45,7 @@ class TeaProductAdmin(admin.ModelAdmin):
 
 @admin.register(Version)
 class VersionAdmin(admin.ModelAdmin):
-    list_display = ('product', 'version_name')
+    list_display = ('product', 'version_number', 'version_name', 'text', 'is_active')
     list_filter = ('product', 'version_name',)
+    list_display_links = ('version_name',)
+    list_editable = ('is_active',)

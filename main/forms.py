@@ -22,7 +22,7 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         for field_name in ['name', 'description']:
             value = cleaned_data.get(field_name, '').lower()
             if any(word in value for word in forbidden_words):
-                raise ValidationError(f"Forbidden word '{word}' is not allowed in the {field_name}.")
+                raise ValidationError(f"Forbidden word '{value}' is not allowed in the {field_name}.")
 
     class Meta:
         model = TeaProduct

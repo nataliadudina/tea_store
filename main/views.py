@@ -239,21 +239,18 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
-        self.object = form.save()
         if formset.is_valid():
-            formset.instance = self.object
-            formset.save()
-
-            # Finds an active version and sets flag True
-            active_version = self.request.POST.getlist('is_active')
-            # Version.objects.filter(product=self.object, id__in=active_version)
-
-            if active_version:
-                # Only update active versions if at least one is selected
-                Version.objects.filter(product=self.object).update(is_active=False)
-                Version.objects.filter(product=self.object, id__in=active_version).update(is_active=True)
-
-        return super().form_valid(form)
+            instances = formset.save(commit=False)
+            active_instances = [instance for instance in instances if instance.is_active]
+            if len(active_instances) > 1:
+                formset._non_form_errors = forms.ValidationError('Only one active version allowed.')
+                return self.form_invalid(form)
+            for instance in instances:
+                instance.product = self.object
+                instance.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
