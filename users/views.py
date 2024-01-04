@@ -26,7 +26,7 @@ class RegisterUser(CreateView):
     def form_valid(self, form):
         # Logins user after successful registration
         response = super().form_valid(form)
-        login(self.request, self.object)
+        login(self.request, self.object, backend='django.contrib.auth.backends.ModelBackend')
         return response
 
 
