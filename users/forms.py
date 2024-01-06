@@ -1,28 +1,31 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm
-from django.urls import reverse_lazy
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordChangeForm, PasswordResetForm
+from django.core.mail import send_mail
+from django.urls import reverse
+from django.utils.crypto import get_random_string
+from django.utils.html import format_html
 
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(label='Username', widget=forms.TextInput(attrs={'class': 'form-input'}))
+    username = forms.CharField(label='Email', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 
     class Meta:
         model = get_user_model()
-        fields = ('username', 'password')
+        fields = ('email', 'password')
 
 
 class RegisterUserForm(UserCreationForm):
-    username = forms.CharField(label="Login", widget=forms.TextInput(attrs={'class': 'form-input'}))
-    password1 = forms.CharField(label="Password", widget=forms.PasswordInput(attrs={'class': 'form-input'}))
-    password2 = forms.CharField(label="Confirm password", widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+    username = forms.CharField(label="Username", required=False, widget=forms.TextInput(attrs={'class': 'form-input'}))
+    password1 = forms.CharField(label="Password*", widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+    password2 = forms.CharField(label="Confirm password*", widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 
     class Meta:
         model = get_user_model()
         fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
         labels = {
-            'email': 'E-mail',
+            'email': 'E-mail*',
             'first_name': 'First name',
             'last_name': 'Last name',
         }
@@ -39,15 +42,20 @@ class RegisterUserForm(UserCreationForm):
             raise forms.ValidationError("This email already exists.")
         return email
 
+    # for verification
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.activation_token = get_random_string(length=32)
+        user.save()
+        return user
+
 
 class ProfileUserForm(forms.ModelForm):
-    username = forms.CharField(disabled=True, label='Login', widget=forms.TextInput(attrs={'class': 'form-input'}))
     email = forms.CharField(disabled=True, label='E-mail', widget=forms.TextInput(attrs={'class': 'form-input'}))
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', 'first_name', 'last_name']
-        # fields = ['username', 'email', 'phone', 'first_name', 'last_name', 'country', 'avatar']
+        fields = ['username', 'email', 'phone', 'first_name', 'last_name', 'country', 'avatar']
         labels = {
             'first_name': 'First name',
             'last_name': 'Last name',
@@ -63,3 +71,46 @@ class UserPasswordChangeForm(PasswordChangeForm):
     new_password1 = forms.CharField(label="New password", widget=forms.PasswordInput(attrs={'class': 'form-input'}))
     new_password2 = forms.CharField(label="Confirm password",
                                     widget=forms.PasswordInput(attrs={'class': 'form-input'}))
+
+
+class CustomPasswordResetForm(PasswordResetForm):
+    # generates new temporary password
+    def save(self, domain_override=None,
+             subject_template_name=None,
+             email_template_name=None,
+             use_https=False, token_generator=None,
+             from_email=None, request=None, extra_email_context=None,
+             subject=None, message=None, html_email_template_name=None, **kwargs):
+
+        email = self.cleaned_data["email"]
+        user_model = get_user_model()
+        try:
+            user = user_model._default_manager.get(email=email)
+        except user_model.DoesNotExist:
+            # Handles the case when the user is not found
+            return
+
+        # Generates temporary password
+        temp_password = get_random_string(length=12)
+        user.set_password(temp_password)
+        user.save()
+
+        # Defines the URL for login page
+        login_url = reverse('users:login')
+        full_login_url = '{}://{}{}'.format('https' if use_https else 'http', domain_override or request.get_host(),
+                                            login_url)
+
+        # Sends letter with a temporary password
+        subject = 'Your temporary password'
+        message = format_html(
+                "You're receiving this email because you requested a password reset for your user account at TeaShop.<br><br>"
+                "Your temporary password: {}.<br>"
+                "Please use it to login and go to your profile to set your new password.<br><br>"
+                "<a href='{}'>Login to TeaShop</a>",
+                temp_password,
+                full_login_url
+            )
+        send_mail(subject, message, from_email, [email], fail_silently=False, html_message=message)
+
+        # Returns None, since Django's tokenization mechanism to reset the password isn't used
+        return

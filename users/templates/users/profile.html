@@ -5,13 +5,23 @@
 {% include 'includes/background_section.html' %}
 
 <div class="container">
-    <div class="row justify-content-center align-items-center" style="height: 60vh;">
+    <div class="row justify-content-center align-items-center">
         <div class="col-12 col-md-4">
             <div class="card box-shadow">
                 <div class="card-body">
-                    <form method="post" action="" class="form-floating">
+                    <form method="post" action="" class="form-floating" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ next }}"/>
+
+                        {% if user.avatar %}
+                        <p style="text-align: center;">
+                            <img src="{{ user.avatar.url }}" alt="User Avatar"
+                                 style="max-width: 50%; max-height: 200px;"></p>
+                        {% else %}
+                        <p style="text-align: center;">
+                            <img src="{{ default_image }}" alt="Default Image"
+                                 style="max-width: 50%; max-height: 200px;"></p>
+                        {% endif %}
+
                         <div class="form-error mb-3">{{ form.non_field_errors }}</div>
                         {% for f in form %}
                         <div class="mb-3">

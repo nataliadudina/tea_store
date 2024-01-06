@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <form method="post" action="" class="form-floating">
                         {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ next }}"/>
+
                         <div class="form-error mb-3">{{ form.non_field_errors }}</div>
                         {% for f in form %}
                         <div class="mb-3">
@@ -19,7 +19,8 @@
                             <div class="form-error">{{ f.errors }}</div>
                         </div>
                         {% endfor %}
-                        <button type="submit" class="btn btn-info w-50">Sign in</button>
+                        <button type="submit" class="btn btn-info w-50 mb-3">Sign in</button>
+                        <p>*Required fields</a></p>
                     </form>
                 </div>
             </div>

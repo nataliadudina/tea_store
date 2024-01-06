@@ -4,7 +4,7 @@ from main.models import TeaProduct, TeaCategory
 
 
 class Command(BaseCommand):
-    help = 'Clears database and loads data from main_data.json fixture'
+    help = 'Clears database and loads data from data.json fixture'
 
     def handle(self, *args, **options):
         # Deletes data from db
@@ -12,4 +12,4 @@ class Command(BaseCommand):
         TeaCategory.objects.all().delete()
 
         # Loads data from fixture
-        call_command('loaddata', 'main_data.json')
+        call_command('loaddata', 'data.json')

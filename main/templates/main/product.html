@@ -35,7 +35,7 @@
                     </div>
                     <br>
 
-                    <!-- Buttons for editing, deleting, viewing articles -->
+                    <!-- Buttons for editing, deleting, viewing products -->
                     <a href="{% url 'product_edit' slug=product.slug %}">Edit</a> |
                     <a href="{% url 'product_delete' slug=product.slug %}">Delete</a>
                     <br><br>
@@ -43,6 +43,7 @@
                     <ul style="list-style-type: disc; padding-inline-end: 20px;">
                         <li><a href="{{ category.get_absolute_url }}">Back to {{ product.category }}</a></li>
                         <li><a href="{% url 'catalog' %}">To all tea types</a></li>
+                        <li>Auther: {{ product.author|default:'admin' }}</li>
                     </ul>
                 </div>
             </div>

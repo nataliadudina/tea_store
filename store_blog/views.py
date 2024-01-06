@@ -9,7 +9,7 @@ from store_blog.models import Article
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
-    fields = ('title', 'content', 'author', 'image', 'publication')
+    fields = ('title', 'content', 'image', 'publication')
     extra_context = {'page_title': 'TeaBlog: write', 'title': 'Writing a story'}
     success_url = reverse_lazy('store_blog:list')
 
@@ -51,12 +51,12 @@ class ArticleDetailView(DetailView):
 
 class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
-    fields = ('title', 'content', 'author', 'image',)
+    fields = ('title', 'content', 'image',)
     extra_context = {'page_title': 'TeaBlog: edit', 'title': 'Updating the story'}
     success_url = reverse_lazy('store_blog:list')
 
     def get_success_url(self):
-        return reverse('store_blog:view', args=[self.kwargs.get('pk')])
+        return reverse('store_blog:view', args=[self.object.slug])
 
 
 class ArticleDeleteView(LoginRequiredMixin, DeleteView):
