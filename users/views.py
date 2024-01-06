@@ -28,8 +28,6 @@ class RegisterUser(CreateView):
     extra_context = {'title': 'Registration', 'page_title': 'Sign in'}
     success_url = reverse_lazy('users:activation_sent')  # for verifying
 
-    # success_url = reverse_lazy('users:profile')
-
     def form_valid(self, form):
         response = super().form_valid(form)
         new_user = form.instance  # Gets user object from a form without saving

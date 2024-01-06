@@ -8,7 +8,7 @@ from django.utils.html import format_html
 
 
 class LoginUserForm(AuthenticationForm):
-    username = forms.CharField(label='Email', widget=forms.TextInput(attrs={'class': 'form-input'}))
+    username = forms.CharField(label='Username or Email', widget=forms.TextInput(attrs={'class': 'form-input'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-input'}))
 
     class Meta:
