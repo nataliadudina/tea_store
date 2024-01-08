@@ -5,12 +5,20 @@ from django.utils.safestring import mark_safe
 
 @admin.register(TeaCategory)
 class TeaCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    fields = ['name', 'description', 'image', 'show_image']
+    list_display = ('pk', 'name', 'show_image',)
     list_display_links = ('name',)
-    ordering = ['name']
+    readonly_fields = ('show_image',)
+    ordering = ['pk']
     list_filter = ('name',)
-    search_fields = ('pk', 'name',)
+    search_fields = ('name', 'description',)
     save_on_top = True
+
+    @admin.display(description='Image')
+    def show_image(self, item):
+        if item.image:
+            return mark_safe(f"<img src='{item.image.url}' width=50>")
+        return ""
 
 
 @admin.register(TeaProduct)
@@ -29,8 +37,10 @@ class TeaProductAdmin(admin.ModelAdmin):
     save_on_top = True
 
     @admin.display(description='Preview')
-    def show_preview(self, item: TeaProduct):
-        return mark_safe(f"<img src='{item.preview.url}' width=50")
+    def show_preview(self, item):
+        if item.preview:
+            return mark_safe(f"<img src='{item.preview.url}' width=50")
+        return ""
 
     @admin.action(description='Set "in stock" status')
     def set_status_in_stock(self, request, queryset):

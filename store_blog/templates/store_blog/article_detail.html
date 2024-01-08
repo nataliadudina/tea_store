@@ -21,8 +21,10 @@
                     </div>
 
                     <!-- Buttons for editing, deleting, viewing articles -->
+                    {% if perms.store_blog.change_article or request.user == article.author %}
                     <a href="{% url 'store_blog:update' article.slug %}">Edit</a> |
                     <a href="{% url 'store_blog:delete' article.slug %}">Delete</a>
+                    {% endif %}
                     <br><br>
 
                     <ul style="margin: 0; padding: 0; text-align: left;">

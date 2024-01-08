@@ -46,13 +46,20 @@
                             <li><a class="dropdown-item" href="{{ category.get_absolute_url }}">{{ category.name }}</a>
                             </li>
                             {% endfor %}
+
+                            <!-- Permissions & restrictions -->
+                            {% if perms.main.add_teaproduct %}
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="/admin/">Admin Panel</a></li>
                             <li><a class="dropdown-item" href="{% url 'product_form' %}">Add product</a></li>
+                            {% endif %}
+                            {% if user.is_staff %}
+                            <li><a class="dropdown-item" href="/admin/">Admin Panel</a></li>
+                            {% endif %}
                         </ul>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link active" href="{% url 'contact' %}">Contact Us</a>
                     </li>

@@ -7,6 +7,7 @@
 <title>Tea Choice</title>
 
 <div><h2 class="text-center text-black">Explore and experience <em>{{ product.name }}</em></h2></div>
+
 <section>
     <div class="container d-flex flex-wrap">
         <div class="card mx-auto col-md-8 w-100 h-100 border-0" style="margin-top: 50px;">
@@ -36,14 +37,15 @@
                     <br>
 
                     <!-- Buttons for editing, deleting, viewing products -->
+                    {% if perms.main.change_teaproduct %}
                     <a href="{% url 'product_edit' slug=product.slug %}">Edit</a> |
                     <a href="{% url 'product_delete' slug=product.slug %}">Delete</a>
+                    {% endif %}
                     <br><br>
 
                     <ul style="list-style-type: disc; padding-inline-end: 20px;">
                         <li><a href="{{ category.get_absolute_url }}">Back to {{ product.category }}</a></li>
                         <li><a href="{% url 'catalog' %}">To all tea types</a></li>
-                        <li>Auther: {{ product.author|default:'admin' }}</li>
                     </ul>
                 </div>
             </div>

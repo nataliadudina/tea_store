@@ -2,47 +2,15 @@ from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from .models import TeaCategory, TeaProduct, Version
 from .templatetags.main_tags import get_random_products
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views import View
 from .forms import ProductForm, VersionForm
 from django.forms import inlineformset_factory
 
 
 import json
-
-
-# def index(request):
-#
-#     slides = [
-#         {
-#             'img': 'main/images/slide1.jpg',
-#             'alt': 'quiet contemplation',
-#             'text': '"There is something in the nature <br>of tea that leads us into a world <br>of quiet contemplation of life." <br>- Lin Yutang.',
-#             'text_color': 'black'
-#         },
-#         {
-#             'img': 'main/images/slide2.jpg',
-#             'alt': 'wisdom in every sip',
-#             'text': '"Tea is the perfect blend of warmth, comfort, <br>and wisdom in every sip." <br>- Arthur Wing Pinero',
-#             'text_color': 'white'
-#         },
-#         {
-#             'img': 'main/images/slide3.jpg',
-#             'alt': 'warming inside',
-#             'text': '"A cup of tea is like a gentle hug for the soul, <br>warming you from the inside out." <br>- Aaron Fisher',
-#             'text_color': 'white'
-#         },
-#     ]
-#
-#     random_products = get_random_products()
-#     context = {
-#         'slides': slides,
-#         'random_products': random_products
-#     }
-#     # return render(request, 'main/index.html', {'random_products': random_products})
-#     return render(request, 'main/index.html', context)
 
 
 class IndexView(View):
@@ -177,11 +145,12 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductCreateView(LoginRequiredMixin, CreateView):
+class ProductCreateView(PermissionRequiredMixin, CreateView):
     model = TeaProduct
     form_class = ProductForm
     template_name = 'main/product_form.html'
     extra_context = {'title': 'Adding a new product'}
+    permission_required = 'main.add_teaproduct'
 
     def get_success_url(self):
         type_slug = self.object.category.slug
@@ -210,11 +179,12 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(PermissionRequiredMixin, UpdateView):
     model = TeaProduct
     form_class = ProductForm
     template_name = 'main/product_form.html'
     extra_context = {'title': 'Editing product information'}
+    permission_required = 'main.change_teaproduct'
 
     def get_success_url(self):
         type_slug = self.object.category.slug
@@ -251,9 +221,10 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             return self.form_invalid(form)
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     model = TeaProduct
     template_name = 'main/product_confirm_delete.html'
+    permission_required = 'main.delete_teaproduct'
 
     def get_success_url(self):
         type_slug = self.object.category.slug    # Get type_slug
