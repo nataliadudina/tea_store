@@ -19,7 +19,8 @@
                             <div class="form-error">{{ f.errors }}</div>
                         </div>
                         {% endfor %}
-                        <button type="submit" class="btn btn-info w-50 mb-3">Login</button>
+                        <button type="submit" class="btn btn-info w-50 mb-3">Login</button> or use
+                        <a href="{% url 'social:begin' 'github' %}"><img src="/media/social-auth/github-logo.png" style="width: 130px; margin-bottom: 15px"></a>
                         <p><a href="{% url 'users:password_reset' %}">Forgot password?</a></p>
                     </form>
                 </div>

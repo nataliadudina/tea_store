@@ -50,9 +50,8 @@ class TeaProduct(models.Model):
     class Meta:
         verbose_name = 'item'
         verbose_name_plural = 'items'
-        # ordering = ['-price']
 
-    def get_absolute_url(self):  # не работает
+    def get_absolute_url(self):
         return reverse('product', kwargs={'type_slug': self.category.slug, 'item_slug': self.slug})
 
 

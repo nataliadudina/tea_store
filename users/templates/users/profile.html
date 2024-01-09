@@ -38,8 +38,10 @@
     </div>
 </div>
 
+{% if not perms.users.social_auth or user.is_superuser %}
 <div class="d-flex justify-content-center">
     <p><a href="{% url 'users:password_change' %}">Change password</a></p>
 </div>
+{% endif %}
 
 {% endblock %}

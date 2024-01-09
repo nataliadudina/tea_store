@@ -26,6 +26,7 @@ urlpatterns = [
                   path('', include('main.urls')),  # add the list of URLs from app/urls.py
                   path('blog/', include('store_blog.urls')),
                   path('users/', include('users.urls', namespace="users")),
+                  path('social-auth/', include('social_django.urls', namespace='social'))
               ] + static(settings.MEDIA_URL,
                          document_root=settings.MEDIA_ROOT)  # for static: from django.conf.urls.static import static
 # for settings: from django.conf import settings
