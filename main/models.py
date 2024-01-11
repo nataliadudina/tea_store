@@ -2,17 +2,19 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
-NULLABLE = {'blank': True, 'null': True}
+NULLABLE = {'blank': True, 'null': True}    # Dictionary containing parameters for nullable fields
 
 
-# custom model manager for filtering products in stock
 class StockManager(models.Manager):
+    """Custom model manager for filtering products in stock"""
     def in_stock(self):
         return self.get_queryset().filter(in_stock=TeaProduct.Status.IN_STOCK)
 
 
 class TeaProduct(models.Model):
+
     class Status(models.TextChoices):
+        """Enum representing the possible statuses of a product"""
         IN_STOCK = 'in_stock', 'In Stock'
         OUT_OF_STOCK = 'out_of_stock', 'Out of Stock'
 
@@ -35,8 +37,8 @@ class TeaProduct(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
     last_change = models.DateTimeField(auto_now=True)
 
-    objects = models.Manager()
-    stock_objects = StockManager()
+    objects = models.Manager()    # Default manager for this model
+    stock_objects = StockManager()    # Custom manager for filtering products in stock
 
     def save(self, *args, **kwargs):
         """Generates slug from model's name"""
@@ -55,7 +57,6 @@ class TeaProduct(models.Model):
         return reverse('product', kwargs={'type_slug': self.category.slug, 'item_slug': self.slug})
 
 
-# tea catalog
 class TeaCategory(models.Model):
     name = models.CharField(max_length=100, verbose_name='Category')
     slug = models.SlugField(max_length=100, unique=True, db_index=True)
@@ -86,4 +87,5 @@ class Version(models.Model):
     class Meta:
         verbose_name = 'version'
         verbose_name_plural = 'versions'
+        # Ensures that there can only be one active version per product
         unique_together = (('product', 'version_number'),)

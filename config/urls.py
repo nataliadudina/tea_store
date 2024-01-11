@@ -25,13 +25,13 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include('main.urls')),  # add the list of URLs from app/urls.py
                   path('blog/', include('store_blog.urls')),
-                  path('users/', include('users.urls', namespace="users")),
-                  path('social-auth/', include('social_django.urls', namespace='social'))
+                  path('users/', include('users.urls', namespace='users')),
+                  path('social-auth/', include('social_django.urls', namespace='social')),
+                  path('__debug__/', include('debug_toolbar.urls')),
               ] + static(settings.MEDIA_URL,
-                         document_root=settings.MEDIA_ROOT)  # for static: from django.conf.urls.static import static
-# for settings: from django.conf import settings
+                         document_root=settings.MEDIA_ROOT)
 
 handler404 = page_not_found  # 404 error handling
 
 admin.site.site_header = 'Admin Panel'
-# admin.site.index_header = 'Admin Panel'
+admin.site.index_title = 'TeaShop'

@@ -36,14 +36,23 @@ class RegisterUserForm(UserCreationForm):
         }
 
     def clean_email(self):
-        # checks that email is unique
+        """
+        Checks that the email is unique.
+        If the email already exists in the database, it raises a ValidationError.
+        """
         email = self.cleaned_data['email']
         if get_user_model().objects.filter(email=email).exists():
             raise forms.ValidationError("This email already exists.")
         return email
 
-    # for verification
     def save(self, commit=True):
+        """
+        Saves the form data to a User object and generates an activation token.
+        It calls the superclass save method to save the form data to a User object,
+        but it doesn't save the User object to the database yet.
+        It generates a random string for the activation token and saves it to the User object.
+        Finally, it saves the User object to the database and returns the User object.
+        """
         user = super().save(commit=False)
         user.activation_token = get_random_string(length=32)
         user.save()
@@ -74,7 +83,7 @@ class UserPasswordChangeForm(PasswordChangeForm):
 
 
 class CustomPasswordResetForm(PasswordResetForm):
-    # generates new temporary password
+    # Generates new temporary password
     def save(self, domain_override=None,
              subject_template_name=None,
              email_template_name=None,
@@ -103,13 +112,13 @@ class CustomPasswordResetForm(PasswordResetForm):
         # Sends letter with a temporary password
         subject = 'Your temporary password'
         message = format_html(
-                "You're receiving this email because you requested a password reset for your user account at TeaShop.<br><br>"
-                "Your temporary password: {}.<br>"
-                "Please use it to login and go to your profile to set your new password.<br><br>"
-                "<a href='{}'>Login to TeaShop</a>",
-                temp_password,
-                full_login_url
-            )
+            "You're receiving this email because you requested a password reset for your user account at TeaShop.<br><br>"
+            "Your temporary password: {}.<br>"
+            "Please use it to login and go to your profile to set your new password.<br><br>"
+            "<a href='{}'>Login to TeaShop</a>",
+            temp_password,
+            full_login_url
+        )
         send_mail(subject, message, from_email, [email], fail_silently=False, html_message=message)
 
         # Returns None, since Django's tokenization mechanism to reset the password isn't used

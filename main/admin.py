@@ -14,6 +14,7 @@ class TeaCategoryAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description',)
     save_on_top = True
 
+    # Provides a path if there is an image, otherwise leaves the field empty to avoid exception
     @admin.display(description='Image')
     def show_image(self, item):
         if item.image:
@@ -23,7 +24,8 @@ class TeaCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(TeaProduct)
 class TeaProductAdmin(admin.ModelAdmin):
-    fields = ['name', 'description', 'preview', 'show_preview', 'ingredients', 'flavour', 'aroma', 'preparation', 'price', 'category', 'in_stock']
+    fields = ['name', 'description', 'preview', 'show_preview', 'ingredients', 'flavour', 'aroma', 'preparation',
+              'price', 'category', 'in_stock']
     list_display = ('name', 'show_preview', 'price', 'category', 'in_stock',)
     list_display_links = ('name',)
     list_editable = ('price', 'in_stock',)
@@ -36,12 +38,14 @@ class TeaProductAdmin(admin.ModelAdmin):
     actions = ['set_status_in_stock', 'set_status_out_of_stock']
     save_on_top = True
 
+    # Provides a path if there is an image, otherwise leaves the field empty to avoid exception
     @admin.display(description='Preview')
     def show_preview(self, item):
         if item.preview:
             return mark_safe(f"<img src='{item.preview.url}' width=50")
         return ""
 
+    # adds actions to the action drop-down list
     @admin.action(description='Set "in stock" status')
     def set_status_in_stock(self, request, queryset):
         count = queryset.update(in_stock=TeaProduct.Status.IN_STOCK)

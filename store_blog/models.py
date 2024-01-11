@@ -32,4 +32,3 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'article'
         verbose_name_plural = 'articles'
-

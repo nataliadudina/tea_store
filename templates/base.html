@@ -105,21 +105,21 @@
             <div class="col-12 col-md-4 text-center">
                 <h5>Tea Time</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Tea History</a></li>
-                    <li><a class="text-muted" href="/blog/">Tea Stories (Blog)</a></li>
+                    <li><a class="text-muted" href="/blog/">Tea Stories</a></li>
+                    <li><a class="text-muted" href="{% url 'tea-history' %}">Tea History</a></li>
                 </ul>
             </div>
             <div class="col-12 col-md-4 text-center">
                 <h5>Ordering</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Shipping & Handling</a></li>
-                    <li><a class="text-muted" href="#">Returns & Exchanges</a></li>
+                    <li><a class="text-muted" href="{% url 'shipping' %}">Shipping & Handling</a></li>
+                    <li><a class="text-muted" href="{% url 'returns' %}">Returns & Exchanges</a></li>
                 </ul>
             </div>
             <div class="col-12 col-md-4 text-center">
                 <h5>Learn More</h5>
                 <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="/contacts/">About Us</a></li>
+                    <li><a class="text-muted" href="{% url 'contacts' %}">About Us</a></li>
                     <li><a class="text-muted" href="/contact/">Contact Us</a></li>
                 </ul>
             </div>

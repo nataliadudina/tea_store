@@ -4,11 +4,10 @@ from .models import TeaCategory, TeaProduct, Version
 from .templatetags.main_tags import get_random_products
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views import View
 from .forms import ProductForm, VersionForm
 from django.forms import inlineformset_factory
-
 
 import json
 
@@ -21,24 +20,28 @@ class IndexView(View):
             {
                 'img': 'main/images/slide1.jpg',
                 'alt': 'quiet contemplation',
-                'text': '"There is something in the nature <br>of tea that leads us into a world <br>of quiet contemplation of life." <br>- Lin Yutang.',
+                'text': '"There is something in the nature <br>of tea that leads us into a world <br>'
+                        'of quiet contemplation of life." <br>- Lin Yutang.',
                 'text_color': 'black'
             },
             {
                 'img': 'main/images/slide2.jpg',
                 'alt': 'wisdom in every sip',
-                'text': '"Tea is the perfect blend of warmth, comfort, <br>and wisdom in every sip." <br>- Arthur Wing Pinero',
+                'text': '"Tea is the perfect blend of warmth, comfort, <br>and wisdom in every sip." <br>'
+                        '- Arthur Wing Pinero',
                 'text_color': 'white'
             },
             {
                 'img': 'main/images/slide3.jpg',
                 'alt': 'warming inside',
-                'text': '"A cup of tea is like a gentle hug for the soul, <br>warming you from the inside out." <br>- Aaron Fisher',
+                'text': '"A cup of tea is like a gentle hug for the soul, <br>warming you from the inside out." <br>'
+                        '- Aaron Fisher',
                 'text_color': 'white'
             },
         ]
 
-        random_products = get_random_products()
+        random_products = get_random_products()  # Retrieves four random products
+        # Context dictionary passed to the template
         context = {
             'slides': slides,
             'random_products': random_products
@@ -48,14 +51,14 @@ class IndexView(View):
 
 
 def contact(request):
-
-    # receives POST-request
+    # Processes POST requests
     if request.method == 'POST':
         name = request.POST.get('name', ' ')
         email = request.POST.get('email', ' ')
         phone = request.POST.get('phone', ' ')
         message = request.POST.get('message', ' ')
 
+        # Creates a dictionary with the form data
         user_data = {
             'Name': name,
             'Email': email,
@@ -63,18 +66,33 @@ def contact(request):
             'Message': message
         }
 
-        # saves data to users_data.json
+        # Saves the form data to a JSON file
         with open('users_data.json', 'a', encoding='utf-8') as f:
             json.dump(user_data, f, ensure_ascii=False)
             f.write('\n')
 
-    return render(request, 'main/contact.html', {'title': 'Contact Tea Shop'})
+    return render(request, 'main/contact.html', {'page_title': 'Contact us', 'title': 'Contact Tea Shop'})
 
 
+# FBV for catalog_list_view
 # def catalog(request):
-#     return render(request, 'main/catalog.html')
+#     products = TeaProduct.objects.all()
+#     for product in products:
+#         active_version = Version.objects.filter(product=product, is_active=True).first()
+#         product.active_version = active_version
+#         context = {
+#             'products': products,
+#         }
+#         return render(request, 'main/catalog.html', context)
+
 
 class CatalogListView(ListView):
+    """
+       A class-based view that lists all the tea products.
+
+       This view fetches all the tea products from the database and passes them to the template.
+       Additionally, it adds the active version of each product to the context.
+       """
     model = TeaProduct
     template_name = 'main/catalog.html'
 
@@ -82,31 +100,38 @@ class CatalogListView(ListView):
         context = super().get_context_data(**kwargs)
         products = context['object_list']
 
-        for product in products:
-            active_version = Version.objects.filter(product=product, is_active=True).first()
-            product.active_version = active_version
+        for prod in products:
+            active_version = Version.objects.filter(product=prod, is_active=True).first()
+            prod.active_version = active_version
 
         return context
 
 
+# FBV for category_list_view
 # def category(request, type_slug):
-#     tea_type = get_object_or_404(TeaCategory, slug=type_slug)   # gets an object from the db or raises Http404
-#
-#     # QuerySet of products in stock of the specified category
-#     in_stock_products = TeaProduct.stock_objects.filter(category=tea_type, in_stock=TeaProduct.Status.IN_STOCK)
-#     data = {'category': tea_type, 'in_stock': in_stock_products}
-#     return render(request, 'main/category.html', data)
+#     cat = get_object_or_404(TeaCategory, slug=type_slug)  # gets an object from the db or raises Http404
+#     products = TeaProduct.stock_objects.filter(category=cat, in_stock=TeaProduct.Status.IN_STOCK)
+#     for product in products:
+#         active_version = Version.objects.filter(product=product, is_active=True).first()
+#         product.active_version = active_version
+#     context = {
+#         'category': cat,
+#         'in_stock': products,
+#     }
+#     return render(request, 'main/category.html', context)
+
 
 class CategoryListView(ListView):
+    """ View for listing tea products within a specific category"""
     template_name = 'main/category.html'
     context_object_name = 'in_stock'
 
     def get_category(self):
-        # Gets TeaCategory object by slug from URL
+        # Gets TeaCategory object associated with the current request
         return get_object_or_404(TeaCategory, slug=self.kwargs['type_slug'])
 
+    # Returns QuerySet of products in stock for the current category
     def get_queryset(self):
-        # Returns QuerySet of products in stock of the specified category
         return TeaProduct.stock_objects.filter(category=self.get_category(), in_stock=TeaProduct.Status.IN_STOCK)
 
     def get_context_data(self, *args, **kwargs):
@@ -115,17 +140,32 @@ class CategoryListView(ListView):
         return context
 
 
+# FBV for product_detail_view
 # def product(request, type_slug, item_slug):
 #     cat = get_object_or_404(TeaCategory, slug=type_slug)
 #     prod = get_object_or_404(TeaProduct, slug=item_slug, category=cat)
-#     return render(request, 'main/product.html', {'category': cat, 'product': prod})
+#     active_version = Version.objects.filter(product=prod, is_active=True).first()
+#     context = {
+#          'product': prod,
+#          'category': cat,
+#          'active_version': active_version,
+#      }
+#     return render(request, 'main/product.html', context)
+
 
 class ProductDetailView(DetailView):
+    """
+    View for showing details of a single tea product.
+    Fetches the product by both slugs from the URL, adds the active version of the product
+    to the context, and renders the template with the context.
+      """
+
     model = TeaProduct
     template_name = 'main/product.html'
-    context_object_name = 'product'    # TeaProduct object
-    slug_url_kwarg = 'item_slug'    # <slug:item_slug> => self.kwargs['item_slug']
+    context_object_name = 'product'  # TeaProduct object
+    slug_url_kwarg = 'item_slug'  # <slug:item_slug> => self.kwargs['item_slug']
 
+    # Override the get_object method to get the product by both slugs
     def get_object(self, queryset=None):
         type_slug = self.kwargs.get('type_slug')
         item_slug = self.kwargs.get('item_slug')
@@ -139,8 +179,8 @@ class ProductDetailView(DetailView):
         cat = get_object_or_404(TeaCategory, slug=type_slug)
         context['category'] = cat
 
-        product = context['object']   # Get product object
-        active_version = Version.objects.filter(product=product, is_active=True).first()    # Get product active version
+        product = context['object']
+        active_version = Version.objects.filter(product=product, is_active=True).first()  # Get product active version
         context['active_version'] = active_version
         return context
 
@@ -159,19 +199,24 @@ class ProductCreateView(PermissionRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
+
+        # Create a formset for the Version model
         version_formset = inlineformset_factory(TeaProduct, Version, form=VersionForm, extra=1)
         if self.request.method == 'POST':
+            # If the request method is POST, initialize the formset with the POST data
             context_data['formset'] = version_formset(self.request.POST)
         else:
+            # Otherwise, initialize the formset without any data
             context_data['formset'] = version_formset()
         return context_data
 
+    # Override the form_valid method to handle form submission
     def form_valid(self, form):
+        # Get the formset from the context data
         formset = self.get_context_data()['formset']
+        self.object = form.save()
 
-        self.object = form.save(commit=False)    # without saving the data to a database
-        self.object.author = self.request.user   # assign the current user as author
-        
+        # If the formset is valid, save it to the database along with the product
         if formset.is_valid():
             formset.instance = self.object
             formset.save()
@@ -205,19 +250,27 @@ class ProductUpdateView(PermissionRequiredMixin, UpdateView):
 
         return context_data
 
+    # Override the form_valid method to handle form submission
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
+
         if formset.is_valid():
             instances = formset.save(commit=False)
+
+            # Check if there is more than one active version, which is not allowed
             active_instances = [instance for instance in instances if instance.is_active]
             if len(active_instances) > 1:
+                # Add a non-form error if multiple active versions
                 formset._non_form_errors = forms.ValidationError('Only one active version allowed.')
                 return self.form_invalid(form)
+
+            # Save each instance and associate it with the current product
             for instance in instances:
                 instance.product = self.object
                 instance.save()
             return super().form_valid(form)
         else:
+            # If the formset is not valid, return to the form with errors
             return self.form_invalid(form)
 
 
@@ -227,9 +280,25 @@ class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'main.delete_teaproduct'
 
     def get_success_url(self):
-        type_slug = self.object.category.slug    # Get type_slug
+        type_slug = self.object.category.slug  # Get type_slug
         return reverse('types', kwargs={'type_slug': type_slug})
 
 
 def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Oops! This page has not been created yet.</h1>')
+
+
+def tea_history(request):
+    return render(request, 'main/footer/history.html', {'page_title': 'Tea History'})
+
+
+def shipping(request):
+    return render(request, 'main/footer/shipping.html', {'page_title': 'Shipping'})
+
+
+def returns(request):
+    return render(request, 'main/footer/returns.html', {'page_title': 'Returns'})
+
+
+def contacts(request):
+    return render(request, 'main/footer/contacts.html', {'page_title': 'Contacts'})

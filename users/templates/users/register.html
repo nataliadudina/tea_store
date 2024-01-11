@@ -20,7 +20,10 @@
                         </div>
                         {% endfor %}
                         <button type="submit" class="btn btn-info w-50 mb-3">Sign in</button>
-                        <p>*Required fields</a></p>
+                        or use
+                        <a href="{% url 'social:begin' 'github' %}"><img src="/media/social-auth/github-logo.png"
+                                                                         style="width: 130px; margin-bottom: 15px"></a>
+                        <p>*Required fields</p>
                     </form>
                 </div>
             </div>

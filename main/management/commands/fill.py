@@ -3,8 +3,11 @@ from main.models import TeaProduct, TeaCategory
 
 
 class Command(BaseCommand):
+    """An example of filling the database with data"""
 
     def handle(self, *args, **kwargs):
+
+        # gets class object of TeaCategory with id=4
         cat4 = TeaCategory.objects.get(id=4)
 
         items_list = [
@@ -45,8 +48,9 @@ class Command(BaseCommand):
              "price": "7.25",
              "category": cat4}
         ]
+
+        # creates a list of class objects related to category with id=4 and saves it in RAM
         items_instances = [TeaProduct(**item) for item in items_list]
 
+        # batch adding data to the database
         TeaProduct.objects.bulk_create(items_instances)
-
-

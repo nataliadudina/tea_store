@@ -2,7 +2,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import BaseBackend
 
 
+"""Custom authentication backend that allows users 
+to authenticate using their email instead of username"""
+
+
 class EmailAuthBackend(BaseBackend):
+    # Authenticates the given credentials
     def authenticate(self, request, username=None, password=None, **kwargs):
         user_model = get_user_model()
         try:
@@ -11,12 +16,14 @@ class EmailAuthBackend(BaseBackend):
             else:
                 user = user_model.objects.get(username=username)
 
+            # Checks if the password matches the user's password
             if user.check_password(password):
                 return user
             return None
         except (user_model.DoesNotExist, user_model.MultipleObjectsReturned):
             return None
 
+    # Returns the User object for the given user ID
     def get_user(self, user_id):
         user_model = get_user_model()
         try:
