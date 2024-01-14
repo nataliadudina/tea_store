@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'store_blog.apps.StoreBlogConfig',
     'debug_toolbar',
+    'captcha',
 ]
 
 MIDDLEWARE = [

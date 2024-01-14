@@ -2,11 +2,12 @@ from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from .models import TeaCategory, TeaProduct, Version
 from .templatetags.main_tags import get_random_products
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views import View
-from .forms import ProductForm, VersionForm
+from .forms import ProductForm, VersionForm,  ContactForm
 from django.forms import inlineformset_factory
 
 import json
@@ -50,28 +51,30 @@ class IndexView(View):
         return render(request, self.template_name, context)
 
 
-def contact(request):
-    # Processes POST requests
-    if request.method == 'POST':
-        name = request.POST.get('name', ' ')
-        email = request.POST.get('email', ' ')
-        phone = request.POST.get('phone', ' ')
-        message = request.POST.get('message', ' ')
+class ContactView(FormView):
+    form_class = ContactForm
+    template_name = 'main/contact.html'
+    success_url = reverse_lazy('home')
+    extra_context = {'page_title': 'Contact us', 'title': 'Contact Tea Shop'}
 
-        # Creates a dictionary with the form data
-        user_data = {
-            'Name': name,
-            'Email': email,
-            'Phone': phone,
-            'Message': message
-        }
+    def form_valid(self, form):
+        user_data = form.cleaned_data
 
-        # Saves the form data to a JSON file
-        with open('users_data.json', 'a', encoding='utf-8') as f:
-            json.dump(user_data, f, ensure_ascii=False)
-            f.write('\n')
+        # Loads existing data from the file (if any)
+        try:
+            with open('users_data.json', 'r', encoding='utf-8') as f:
+                existing_data = json.load(f)
+        except (json.JSONDecodeError, FileNotFoundError):
+            existing_data = []
 
-    return render(request, 'main/contact.html', {'page_title': 'Contact us', 'title': 'Contact Tea Shop'})
+        # Appends new user's data to the existing data
+        existing_data.append(user_data)
+
+        # Writes the entire list back to the file
+        with open('users_data.json', 'w', encoding='utf-8') as f:
+            json.dump(existing_data, f, ensure_ascii=False, indent=2)
+
+        return super().form_valid(form)
 
 
 # FBV for catalog_list_view
@@ -95,6 +98,7 @@ class CatalogListView(ListView):
        """
     model = TeaProduct
     template_name = 'main/catalog.html'
+    extra_context = {'page_title': 'TeaShop: Catalog'}
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -137,6 +141,7 @@ class CategoryListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category'] = self.get_category()
+        context['page_title'] = f"TeaShop: {context['category'].name}"
         return context
 
 

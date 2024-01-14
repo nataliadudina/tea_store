@@ -1,6 +1,7 @@
 from django import forms
 from .models import TeaProduct, TeaCategory, Version
 from django.core.exceptions import ValidationError
+from captcha.fields import CaptchaField
 
 
 # Mixin class to add common styles to form fields
@@ -12,6 +13,14 @@ class StyleFormMixin:
         for field_name, field in self.fields.items():  # self.fields - django dict
             if field_name != 'is_active':
                 field.widget.attrs['class'] = 'form-control'
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField(max_length=100)
+    phone = forms.CharField(max_length=20)
+    message = forms.CharField(widget=forms.Textarea(attrs={'cols': 40, 'rows': 5}))
+    captcha = CaptchaField()
 
 
 # Form for creating and updating TeaProduct instances

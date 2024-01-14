@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import ProductDetailView, CatalogListView, CategoryListView, IndexView, ProductCreateView, \
-    ProductUpdateView, ProductDeleteView
+    ProductUpdateView, ProductDeleteView, ContactView
 from . import views
 
 # Example of URLs when Function Based Views (FBVs) are used
@@ -14,7 +14,7 @@ from . import views
 
 urlpatterns = [
     path('', IndexView.as_view(), name='home'),
-    path('contact/', views.contact, name='contact'),
+    path('contact/', ContactView.as_view(), name='contact'),
     path('catalog/', CatalogListView.as_view(), name='catalog'),  # all product types
     path('catalog/<slug:type_slug>/', CategoryListView.as_view(), name='types'),  # one product type
     path('catalog/<slug:type_slug>/<slug:item_slug>/', ProductDetailView.as_view(), name='product'),  # product page

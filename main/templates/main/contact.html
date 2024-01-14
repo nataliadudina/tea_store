@@ -1,49 +1,36 @@
-<!DOCTYPE html>
 {% extends 'base.html' %}
 {% load static %}
 
 {% block content %}
-    <title>Contact Us</title>
 
 {% include 'includes/background_section.html' %}
 
-<h6 class="text-center mb-4">Contact Tea Shop through this form and we will respond within a maximum period of 48-72
+<h6 class="text-center mb-4">Contact Tea Shop through this form, and we will respond within a maximum period of 48-72
     working hours.</h6>
-
 <!-- Feedback form -->
-<div class="container">
+<div class="container mb-5">
     <div class="row justify-content-center align-items-center" style="height: 60vh;">
         <div class="col-12 col-md-4">
             <div class="card box-shadow">
                 <div class="card-body">
                     <form method="post" action="" class="form-floating">
                         {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                        <div class="form-error mb-3">{{ form.non_field_errors }}</div>
+                        {% for f in form %}
                         <div class="mb-3">
-                            <label for="name">Your name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="name" required>
+                            <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>
+                            {{ f }}
+                            <div class="form-error">{{ f.errors }}</div>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="email"
-                                   aria-describedby="emailHelp">
-                            <div id="emailHelp" class="form-text"></div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone">Phone number</label>
-                            <input type="text" name="phone" class="form-control" id="phone" placeholder="phone"
-                                   required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message">Your message</label>
-                            <textarea name="message" class="form-control" id="message"></textarea>
-                        </div>
-                        <button type="submit" class="w-100 btn btn-info">Send</button>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-info w-50 mb-3">Send</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<br>
 
 {% endblock %}
