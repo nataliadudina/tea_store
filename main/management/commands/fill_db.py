@@ -28,8 +28,3 @@ class Command(BaseCommand):
 
         # Loads data from fixture
         call_command('loaddata', 'data.json')
-
-# проверить докстринг
-# проверить команду call_command('loaddata', 'data.json')
-# какой путь? data, data.json или fixtures/data.json
-# как django ищет фикстуры?

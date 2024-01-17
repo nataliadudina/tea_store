@@ -4,15 +4,6 @@ from .views import ProductDetailView, CatalogListView, CategoryListView, IndexVi
 from . import views
 from django.views.decorators.cache import cache_page
 
-# Example of URLs when Function Based Views (FBVs) are used
-# urlpatterns = [
-#     path('', views.index, name='home'),
-#     path('contact/', views.contact, name='contact'),
-#     path('catalog/', views.catalog, name='catalog'),
-#     path('catalog/<slug:type_slug>/', views.category, name='types'),
-#     path('catalog/<slug:type_slug>/<slug:item_slug>/', views.product, name='product'),
-# ]
-
 urlpatterns = [
     path('', IndexView.as_view(), name='home'),
     path('contact/', ContactView.as_view(), name='contact'),

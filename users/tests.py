@@ -28,7 +28,7 @@ class RegisterUserTestCase(TestCase):
         user_model = get_user_model()
 
         path = reverse('users:register')
-        response = self.client.post(path, self.data)  # Filling in the registration form
+        response = self.client.post(path, self.data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
         self.assertRedirects(response, reverse('users:activation_sent'))
         self.assertTrue(user_model.objects.filter(email=self.data['email']).exists())
@@ -38,12 +38,12 @@ class RegisterUserTestCase(TestCase):
 
         path = reverse('users:register')
         response = self.client.post(path, self.data)
-        self.assertEqual(response.status_code, HTTPStatus.OK)  # Checks that the page hasn't changed
+        self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, "The two password fields didn’t match")
 
     def test_user_registration_user_exists_error(self):
         user_model = get_user_model()
-        user_model.objects.create(email=self.data['email'])  # Creates a new user
+        user_model.objects.create(email=self.data['email'])
 
         path = reverse('users:register')
         response = self.client.post(path, self.data)

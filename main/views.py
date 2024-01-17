@@ -77,18 +77,6 @@ class ContactView(FormView):
         return super().form_valid(form)
 
 
-# FBV for catalog_list_view
-# def catalog(request):
-#     products = TeaProduct.objects.all()
-#     for product in products:
-#         active_version = Version.objects.filter(product=product, is_active=True).first()
-#         product.active_version = active_version
-#         context = {
-#             'products': products,
-#         }
-#         return render(request, 'main/catalog.html', context)
-
-
 class CatalogListView(ListView):
     """
        A class-based view that lists all the tea types.
@@ -111,20 +99,6 @@ class CatalogListView(ListView):
         return context
 
 
-# FBV for category_list_view
-# def category(request, type_slug):
-#     cat = get_object_or_404(TeaCategory, slug=type_slug)  # gets an object from the db or raises Http404
-#     products = TeaProduct.stock_objects.filter(category=cat, in_stock=TeaProduct.Status.IN_STOCK)
-#     for product in products:
-#         active_version = Version.objects.filter(product=product, is_active=True).first()
-#         product.active_version = active_version
-#     context = {
-#         'category': cat,
-#         'in_stock': products,
-#     }
-#     return render(request, 'main/category.html', context)
-
-
 class CategoryListView(ListView):
     """ View for listing tea products within a specific category"""
     template_name = 'main/category.html'
@@ -145,19 +119,6 @@ class CategoryListView(ListView):
         return context
 
 
-# FBV for product_detail_view
-# def product(request, type_slug, item_slug):
-#     cat = get_object_or_404(TeaCategory, slug=type_slug)
-#     prod = get_object_or_404(TeaProduct, slug=item_slug, category=cat)
-#     active_version = Version.objects.filter(product=prod, is_active=True).first()
-#     context = {
-#          'product': prod,
-#          'category': cat,
-#          'active_version': active_version,
-#      }
-#     return render(request, 'main/product.html', context)
-
-
 class ProductDetailView(DetailView):
     """
     View for showing details of a single tea product.
@@ -167,8 +128,8 @@ class ProductDetailView(DetailView):
 
     model = TeaProduct
     template_name = 'main/product.html'
-    context_object_name = 'product'  # TeaProduct object
-    slug_url_kwarg = 'item_slug'  # <slug:item_slug> —> self.kwargs['item_slug']
+    context_object_name = 'product'
+    slug_url_kwarg = 'item_slug'
 
     # Override the get_object method to get the product by both slugs
     def get_object(self, queryset=None):
@@ -185,7 +146,7 @@ class ProductDetailView(DetailView):
         context['category'] = cat
 
         product = context['object']
-        active_version = Version.objects.filter(product=product, is_active=True).first()  # Get product active version
+        active_version = Version.objects.filter(product=product, is_active=True).first()  # Gets product active version
         context['active_version'] = active_version
         return context
 
@@ -293,6 +254,7 @@ def page_not_found(request, exception):
     return HttpResponseNotFound('<h1>Oops! This page has not been created yet.</h1>')
 
 
+# footer links
 def tea_history(request):
     return render(request, 'main/footer/history.html', {'page_title': 'Tea History'})
 

@@ -15,10 +15,10 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
     # Validates the form and sets the article's slug and author
     def form_valid(self, form):
         if form.is_valid():
-            new_article = form.save(commit=False)  # Prepare the article without saving to DB
-            new_article.slug = slugify(new_article.title)  # Generate a slug from the title
-            new_article.author = self.request.user  # Set the current user as the author
-            new_article.save()   # Save the article to the DB
+            new_article = form.save(commit=False)
+            new_article.slug = slugify(new_article.title)
+            new_article.author = self.request.user
+            new_article.save()
 
             # If an image is provided, attach it to the article
             image = form.cleaned_data['image']
@@ -26,7 +26,7 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
                 new_article.image = image
                 new_article.save()
 
-            return super().form_valid(form)  # Call the superclass method to handle redirection
+            return super().form_valid(form)
 
 
 class BlogListView(ListView):
@@ -47,9 +47,9 @@ class ArticleDetailView(DetailView):
     extra_context = {'page_title': 'TeaBlog: read'}
 
     def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)  # Retrieves the article
-        self.object.views_count += 1  # Increment the views count
-        self.object.save()  # Save the updated article
+        self.object = super().get_object(queryset)
+        self.object.views_count += 1
+        self.object.save()
         return self.object
 
 

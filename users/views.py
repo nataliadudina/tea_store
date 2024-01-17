@@ -42,7 +42,7 @@ class RegisterUser(CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        new_user = form.instance  # Gets user object from a form without saving
+        new_user = form.instance
 
         # Sends an email to the user with the activation link
         send_activation_email(self.request, new_user)  # service function is used

@@ -12,8 +12,10 @@ class GetPagesTestCase(TestCase):
 
     def test_mainpage(self):
         path = reverse('home')
-        response = self.client.get(path)    # simulates various requests to the server from the browser
-                                            # and gets the result of the server response
+
+        # Simulates various requests to the server from the browser
+        # and gets the result of the server response
+        response = self.client.get(path)
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertTemplateUsed(response, 'main/index.html')
 
