@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'includes/background_section.html' %}
+
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 60vh;">
+        <div class="col-12 col-md-4">
+            <div class="card box-shadow">
+                <div class="card-body">
+                    <form method="post" action="" class="form-floating">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                        <div class="form-error mb-3">{{ form.non_field_errors }}</div>
+                        {% for f in form %}
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                            {{ f }}
+                            <div class="form-error">{{ f.errors }}</div>
+                        </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-info w-50 mb-3">Login</button>
+                        or use
+                        <a href="{% url 'social:begin' 'github' %}"><img src="/media/social-auth/github-logo.png"
+                                                                         style="width: 130px; margin-bottom: 15px"></a>
+                        <p><a href="{% url 'users:password_reset' %}">Forgot password?</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

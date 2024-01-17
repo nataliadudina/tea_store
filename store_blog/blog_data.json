@@ -1,0 +1,44 @@
+[
+  {
+    "model": "store_blog.article",
+    "pk": 9,
+    "fields": {
+      "title": "Tea, Love, and Marriage",
+      "slug": "tea-love-and-marriage",
+      "content": "Kate says their tea love story began when Derek, her friend's friend, said he would be coming to Seattle for the Northwest Tea Festival and was looking for recommendations. Kate messaged him some suggestions and they chatted a bit each day before his trip. At the festival, they shared tea and saw each other during his visit. Derek was living in a different state at the time. On day two of his five-day stay, they realized they were falling in love. A year-and-a-half later, he and Kate married each other! \r\n\r\n\"Speaking of tea and marriage, friends and family members were aware of my love for tea when my husband and I became engaged. So, tea is also part of my love story. Friends threw us a lovely tea engagement party at their house. And, my family organized an afternoon tea for my bridal shower. At the shower, Black Currant was one of the teas served. I loved it! To this day, it is one of the few fruit-flavored teas that I enjoy. Every time I see it on a menu or take a sip, I remember that special time in my love story and the kindness of our friends and family.\"",
+      "author": null,
+      "image": "images/blog/love-story.jpg",
+      "time_created": "2023-12-04T03:40:00.968Z",
+      "publication": "published",
+      "views_count": 31
+    }
+  },
+  {
+    "model": "store_blog.article",
+    "pk": 10,
+    "fields": {
+      "title": "Funny Tea Story",
+      "slug": "funny-tea-story",
+      "content": "When I moved to Hong Kong I bought tea and other local foods and boxed back to family back in USA. They were interested what wife and I cooked with here. In my box was a big round flat piece of dried seaweed. It looked like tea and they cant read Chinese in USA.\r\n\r\nSo months later on the phone I asked about the stuff I sent. My dad said it was all ok except the tea from the big box. I asked, \"Tea in the big box?\"\r\n\r\nHe said, \"Yeh, the green tea.\" I laughed and said \"It's dried seaweed for noodles.\"\r\n\r\nHe went on to tell me when people visited he'd break out some cool tea from Hong Kong and serve it up. Most said it was plain and kind of grainy. Not very good. He said most of my aunts and uncles had tried it by then.",
+      "author": null,
+      "image": "images/blog/funny-story.jpg",
+      "time_created": "2023-12-04T05:15:18.134Z",
+      "publication": "published",
+      "views_count": 44
+    }
+  },
+  {
+    "model": "store_blog.article",
+    "pk": 11,
+    "fields": {
+      "title": "The Great Tea Bag Caper",
+      "slug": "the-great-tea-bag-caper",
+      "content": "I'd been having a rough day at work, and when I finally got home, I was in desperate need of a good laugh. So, I decided to make myself a cup of tea and watch a funny movie. \r\nAs I rummaged through my kitchen, I realized that I was out of tea bags. Great, just what I needed - another thing to add to my list of errands. But then, I remembered a funny story I'd heard about a man who accidentally ordered 200 pounds of tea instead of his usual 20 bags. \r\nI thought, \"Why not?\" and decided to give it a try. I called the local tea shop and asked if they could sell me 200 pounds of tea. The guy on the phone laughed and said, \"I'm sorry, but we don't sell tea in such large quantities. We only sell individual bags.\" I explained my situation, and he finally agreed to sell me 200 bags, but I had to come and pick them up in person. \r\nAs I walked into the tea shop, the smell of fresh tea leaves filled the air, and I felt my mood lighten. The owner, Mr. Tea, greeted me with a warm smile and handed me the 200 bags of tea. I thanked him and left, feeling like a kid on Christmas morning.\r\nOn the way home, I couldn't help but think about the hilarious looks I would get from my neighbors as I carried my giant bag of tea. But hey, at least I'd have a great story to share over my next cup of tea!",
+      "author": null,
+      "image": "images/blog/tea-joke-story.jpg",
+      "time_created": "2023-12-04T05:34:00.293Z",
+      "publication": "published",
+      "views_count": 18
+    }
+  }
+]

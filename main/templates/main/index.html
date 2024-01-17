@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% load main_tags %}
+
+<!-- Main content -->
+{% block content %}
+    <title>TeaShop</title>
+
+<section>
+    <div class="container-xxl">
+        <div class="row">
+            <div><h2 class="text-center text-black">Explore and experience tea...</h2></div>
+            <div><h6 class="text-center text-black"
+                     style="line-height: 1.5; margin-bottom: 10px; padding-bottom: 10px;">Allow us to take you on a
+                journey into the world of tea, where you
+                can experience tea classics, rare
+                finds, and specialty blends without leaving your home!</h6></div>
+        </div>
+    </div>
+</section>
+
+<!-- Carousel -->
+<section>
+    <div class="container-xxl">
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+                {% for slide in slides %}
+                <button type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide-to="{{ forloop.counter0 }}"
+                        {% if forloop.first %} class="active" {% endif %}
+                        aria-label="Slide {{ forloop.counter }}"></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for slide in slides %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %} custom-slide">
+                    <div class="img-container">
+                        <img src="{% static slide.img %}" class="d-block w-100" alt="{{ slide.alt }}">
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <p class="custom-text" style="color: {{ slide.text_color }}"><strong>{{ slide.text|safe }}</strong></p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<div>
+    <h5 class="text-center text-black">
+        Discover our range of teas from dark and intense, to bright and subtle to the rose-petal romantic.<br>
+        <a href="{% url 'catalog' %}">
+            <img src="{% static 'main/images/icon-tea-leaves.png' %}" alt="Tea leaves" width="30" height="30"
+                 style="margin: 0 0;">
+            Explore all tea types
+            <img src="{% static 'main/images/icon-tea-leaves.png' %}" alt="Tea leaves" width="30" height="30"
+                 style="margin: 0 0;"></a>
+    </h5>
+</div>
+
+<!-- Random sample of 4 products -->
+<section>
+    <div class="container d-flex flex-wrap">
+        {% random_items as items %}
+        {% for item in items %}
+        <div class="card" style="width: 19rem; margin: 10px; text-align: justify;">
+            <a href="{% url 'product' type_slug=item.category.slug item_slug=item.slug %}">
+                <img src="{% imagepath_tag item.preview %}" class="card-img-top"
+                     alt="...">
+            </a>
+            <div class="card-body"
+                 style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                <div>
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.description|truncatewords:35 }}</p>
+                </div>
+                <a href="{% url 'product' type_slug=item.category.slug item_slug=item.slug %}" class="btn btn-warning"
+                   style="margin-bottom: 7px;">Read more</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

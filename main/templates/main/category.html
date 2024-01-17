@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% load main_tags %}
+
+{% block content %}
+
+<section>
+    <div class="container-xxl">
+        <div class="row">                                                 <!--category.name - TeaCategory class instance-->
+            <div><h2 class="text-center text-black">Explore and experience <em>{{ category.name|lower }}</em></h2></div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container d-flex flex-wrap">
+        {% for item in in_stock %}    <!-- Filtered QuerySet of in-stock items only of a specified category (via fk) -->
+        <div class="card" style="width: 18rem; margin: 10px; text-align: justify;">
+            <a href="{{ item.get_absolute_url }}">
+            <img src="{% imagepath_tag item.preview %}" class="card-img-top" alt="...">
+            </a>
+            <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                <div>
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="card-text">{{ item.description|truncatewords:35 }}</p>
+                </div>
+                <a href="{{ item.get_absolute_url }}" class="btn btn-warning" style="margin-bottom: 7px;">Go for it!</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

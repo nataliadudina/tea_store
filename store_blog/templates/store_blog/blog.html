@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+
+{% include 'includes/background_section.html' %}
+
+<div class="container mt-4">
+
+    <!-- Button for creating new article -->
+    <a href="{% url 'store_blog:create' %}" class="btn btn-outline-success mb-2">Create an article</a>
+
+    <div class="row">
+        {% for article in articles %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <br>
+                    <p class="card-text">{{ article.content|linebreaks|truncatewords:60 }}</p>
+
+                    <a href="{% url 'store_blog:view' article.slug %}" class="btn btn-outline-info btn-sm">Read</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    {% for object in objects_list %}
+    {% endfor %}
+</div>
+
+{% endblock %}

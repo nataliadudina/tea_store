@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div><h2 class="text-center text-black">{{ article.title }}</h2></div>
+<section>
+    <div class="container d-flex flex-wrap">
+        <div class="card mx-auto col-md-8 w-100 h-100 border-0" style="margin-top: 30px;">
+            <div class="row g-0 d-flex justify-content-center">
+                <div class="col-md-5">
+                    {% if article.image %}
+                    <img src="/media/{{ article.image }}"
+                         class="img-fluid rounded-start" alt="...">
+                    {% endif %}
+                </div>
+                <div class="col-md-5">
+                    <div class="card-body">
+                        <p class="card-text" style="text-align: justify;">{{ article.content|linebreaks }}</p>
+                        <p style="text-align: right;"><b>Author:</b> {{ article.author.username|default:"unknown" }}</p>
+                        <p style="text-align: right;"><b>Published:</b> {{ article.time_created|date:"F j, Y" }}</p>
+                    </div>
+
+                    <!-- Buttons for editing, deleting, viewing articles -->
+                    {% if perms.store_blog.change_article or request.user == article.author %}
+                    <a href="{% url 'store_blog:update' article.slug %}">Edit</a> |
+                    <a href="{% url 'store_blog:delete' article.slug %}">Delete</a>
+                    {% endif %}
+                    <br><br>
+
+                    <ul style="margin: 0; padding: 0; text-align: left;">
+                        <li>Pageviews: {{ object.views_count }}</li>
+                        <li><a href="{% url 'store_blog:list' %}">To all articles</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

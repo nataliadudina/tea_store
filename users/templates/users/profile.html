@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'includes/background_section.html' %}
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-12 col-md-4">
+            <div class="card box-shadow">
+                <div class="card-body">
+                    <form method="post" action="" class="form-floating" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        {% if user.avatar %}
+                        <p style="text-align: center;">
+                            <img src="{{ user.avatar.url }}" alt="User Avatar"
+                                 style="max-width: 50%; max-height: 200px;"></p>
+                        {% else %}
+                        <p style="text-align: center;">
+                            <img src="{{ default_image }}" alt="Default Image"
+                                 style="max-width: 50%; max-height: 200px;"></p>
+                        {% endif %}
+
+                        <div class="form-error mb-3">{{ form.non_field_errors }}</div>
+                        {% for f in form %}
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</label>
+                            {{ f }}
+                            <div class="form-error">{{ f.errors }}</div>
+                        </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-info w-50">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not perms.users.social_auth or user.is_superuser %}
+<div class="d-flex justify-content-center">
+    <p><a href="{% url 'users:password_change' %}">Change password</a></p>
+</div>
+{% endif %}
+
+{% endblock %}

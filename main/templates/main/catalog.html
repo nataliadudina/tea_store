@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% load main_tags %}
+
+{% block content %}
+
+<section>
+    <div class="container-xxl">
+        <div class="row">
+            <div><h2 class="text-center text-black">Explore and experience various tea types</h2><br></div>
+            <div><h4 class="text-center text-black">Whether a tea leaf becomes white, green, oolong, black or pu-erh
+                depends entirely on how it is processed, which is why we’re obsessed with the journey from
+                plantation to cup.</h4></div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container d-flex flex-wrap justify-content-center align-items-center">
+        {% for category in tea_categories %}   <!--context_processor used-->
+        <div class="card" style="width: 22rem; margin: 10px; text-align: justify;">
+            <a href="{{ category.get_absolute_url }}">
+            <img src="{{ category.image|mediapath }}" class="card-img-top"
+                 alt="...">        <!--templatetags are used-->
+            </a>
+            <div class="card-body"
+                 style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+                <h5 class="card-title">{{ category.name }}</h5>
+                <p class="card-text">{{ category.description|truncatewords:35 }}.</p>
+                <a href="{{ category.get_absolute_url }}" class="btn btn-warning">Choose</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

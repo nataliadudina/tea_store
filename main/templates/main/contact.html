@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% include 'includes/background_section.html' %}
+
+<h6 class="text-center mb-4">Contact Tea Shop through this form, and we will respond within a maximum period of 48-72
+    working hours.</h6>
+<!-- Feedback form -->
+<div class="container mb-5">
+    <div class="row justify-content-center align-items-center" style="height: 60vh;">
+        <div class="col-12 col-md-4">
+            <div class="card box-shadow">
+                <div class="card-body">
+                    <form method="post" action="" class="form-floating">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                        <div class="form-error mb-3">{{ form.non_field_errors }}</div>
+                        {% for f in form %}
+                        <div class="mb-3">
+                            <label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</label>
+                            {{ f }}
+                            <div class="form-error">{{ f.errors }}</div>
+                        </div>
+                        {% endfor %}
+                        <button type="submit" class="btn btn-info w-50 mb-3">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+{% endblock %}
