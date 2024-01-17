@@ -91,9 +91,9 @@ class ContactView(FormView):
 
 class CatalogListView(ListView):
     """
-       A class-based view that lists all the tea products.
+       A class-based view that lists all the tea types.
 
-       This view fetches all the tea products from the database and passes them to the template.
+       This view fetches all the tea types from the database and passes them to the template.
        Additionally, it adds the active version of each product to the context.
        """
     model = TeaProduct
@@ -168,7 +168,7 @@ class ProductDetailView(DetailView):
     model = TeaProduct
     template_name = 'main/product.html'
     context_object_name = 'product'  # TeaProduct object
-    slug_url_kwarg = 'item_slug'  # <slug:item_slug> => self.kwargs['item_slug']
+    slug_url_kwarg = 'item_slug'  # <slug:item_slug> —> self.kwargs['item_slug']
 
     # Override the get_object method to get the product by both slugs
     def get_object(self, queryset=None):
