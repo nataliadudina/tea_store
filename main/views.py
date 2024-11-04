@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views import View
-from .forms import ProductForm, VersionForm,  ContactForm
+from .forms import ProductForm, VersionForm, ContactForm
 from django.forms import inlineformset_factory
 
 import json
@@ -52,6 +52,15 @@ class IndexView(View):
 
 
 class ContactView(FormView):
+    """
+    A view that handles user submissions from the contact form.
+
+    This view renders a contact form where users can input their name, email,
+    phone number, message, and complete a CAPTCHA. Upon successful form submission,
+    the user data is saved to a JSON file (`users_data.json`). If the JSON file
+    does not exist or contains invalid data, it will be created or reinitialized
+    as a list to store the new entry.
+    """
     form_class = ContactForm
     template_name = 'main/contact.html'
     success_url = reverse_lazy('home')
@@ -64,6 +73,9 @@ class ContactView(FormView):
         try:
             with open('users_data.json', 'r', encoding='utf-8') as f:
                 existing_data = json.load(f)
+                # Ensure existing_data is a list
+                if not isinstance(existing_data, list):
+                    existing_data = []
         except (json.JSONDecodeError, FileNotFoundError):
             existing_data = []
 
